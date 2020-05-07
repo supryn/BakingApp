@@ -5,9 +5,7 @@ import android.util.Log;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.udacity.android.popularmovies.model.Movie;
-import com.udacity.android.popularmovies.model.Review;
-import com.udacity.android.popularmovies.model.Trailer;
+import com.udacity.android.bakingapp.model.Recipe;
 
 import java.util.List;
 
@@ -17,41 +15,50 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Helper class to build and retrieve a Retrofit instance.
+ * Wrapper class around Retrofit library.
  *
  */
-public class RetrofitClient {
+public final class RetrofitClient {
 
     private static final String LOG_TAG = RetrofitClient.class.getSimpleName();
+    private static final String INSTANCE_CREATED = LOG_TAG + " instance created.";
+
+    private static RetrofitClient sInstance;
 
     private static Retrofit mRetrofit;
     private static final Object LOCK = new Object();
 
-    public static Retrofit getInstance(Context context) {
-        Log.d(LOG_TAG, "Getting Retrofit instance.");
-        if (mRetrofit == null) {
+
+    private RetrofitClient(Context context) {
+        mRetrofit = new Retrofit.Builder()
+            .baseUrl(BakingDataSource.BAKING_APP_URL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(createGsonConverter(context))
+            .build();
+    }
+
+    public static RetrofitClient getInstance(Context context) {
+        if (sInstance == null) {
             synchronized (LOCK) {
-                mRetrofit = new Retrofit.Builder()
-                        .baseUrl(MoviesDataSource.MOVIE_DB_BASE_URL)
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .addConverterFactory(createGsonConverter(context))
-                        .build();
-                Log.d(LOG_TAG, "Created Retrofit instance.");
+                sInstance = new RetrofitClient(context);
+                Log.d(LOG_TAG, INSTANCE_CREATED);
             }
         }
 
-        return mRetrofit;
+        return sInstance;
     }
 
     private static Converter.Factory createGsonConverter(Context context) {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-//        gsonBuilder.registerTypeAdapter(
-//                new TypeToken<List<Movie>>() {}.getType(),
-//                new MovieDetailsDeserializer(context));
-
+        gsonBuilder.registerTypeAdapter(
+                new TypeToken<List<Recipe>>() {}.getType(),
+                new RecipeDeserializer(context));
 
         return GsonConverterFactory.create(gsonBuilder.create());
     }
 
+    public BakingNetworkAPI getNetworkService() {
+        return mRetrofit.create(BakingNetworkAPI.class);
+    }
 }

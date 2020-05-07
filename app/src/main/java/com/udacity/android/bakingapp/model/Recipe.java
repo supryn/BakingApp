@@ -15,6 +15,9 @@ public class Recipe {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+    @ColumnInfo(name = "recipe_id")
+    public int recipeId;
+
     @ColumnInfo(name = "name")
     public String name;
 
@@ -22,18 +25,19 @@ public class Recipe {
     public int servings;
 
     @ColumnInfo(name = "image")
-    private String image;
+    public String image;
 
     @ColumnInfo(name = "ingredients")
     @TypeConverters(BakingTypeConverter.class)
-    private List<Ingredient> ingredients;
+    public List<Ingredient> ingredients;
 
     @ColumnInfo(name = "steps")
     @TypeConverters(BakingTypeConverter.class)
-    private List<Step> steps;
+    public List<Step> steps;
 
-    public Recipe(int id, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
+    public Recipe(int id, int recipeId, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
         this.id = id;
+        this.recipeId = recipeId;
         this.name = name;
         this.servings = servings;
         this.image = image;

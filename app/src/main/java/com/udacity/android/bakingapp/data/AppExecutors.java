@@ -7,18 +7,18 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /**
- * Executors to help run database related tasks off the main thread.
+ * Executors to help run database or network related tasks off the main thread.
  *
  */
-public class AppExecutors {
+public final class AppExecutors {
 
     private static final String LOG_TAG = AppExecutors.class.getSimpleName();
+    private static final String INSTANCE_CREATED = LOG_TAG + " instance created.";
 
-    private static AppExecutors sInstance;
     private static final Object LOCK = new Object();
+    private static AppExecutors sInstance;
     private final Executor mDiskExecutor;
     private final Executor mNetworkExecutor;
-
 
     private AppExecutors(Executor disk, Executor network) {
         mDiskExecutor = disk;
@@ -26,13 +26,12 @@ public class AppExecutors {
     }
 
     public static AppExecutors getInstance() {
-        Log.d(LOG_TAG, "Getting AppExecutors instance.");
         if (sInstance == null) {
             synchronized (LOCK) {
                 sInstance = new AppExecutors(
                         Executors.newSingleThreadExecutor(),
                         Executors.newFixedThreadPool(2));
-                Log.d(LOG_TAG, "AppExecutors instance created.");
+                Log.d(LOG_TAG, INSTANCE_CREATED);
             }
         }
 

@@ -12,22 +12,25 @@ import com.udacity.android.bakingapp.model.Ingredient;
 import com.udacity.android.bakingapp.model.Recipe;
 import com.udacity.android.bakingapp.model.Step;
 
+/**
+ * Database for storing recipe information.
+ *
+ */
 @Database(entities = {Recipe.class, Ingredient.class, Step.class}, version = 1, exportSchema = false)
 @TypeConverters({BakingTypeConverter.class})
-public abstract class BakingAppDatabase extends RoomDatabase {
+public abstract class BakingDatabase extends RoomDatabase {
 
-    private static BakingAppDatabase sInstance;
-    private static final String LOG_TAG = BakingAppDatabase.class.getSimpleName();
+    private static BakingDatabase sInstance;
+    private static final String LOG_TAG = BakingDatabase.class.getSimpleName();
 
-    private static final String DB_NAME = "Popular_Movies";
+    private static final String DB_NAME = "Baking_App";
 
-
-    public static BakingAppDatabase getInstance(Context context) {
+    public static BakingDatabase getInstance(Context context) {
         Log.d(LOG_TAG, "Retrieving Database instance.");
         if (sInstance == null) {
-            synchronized (BakingAppDatabase.class) {
+            synchronized (BakingDatabase.class) {
                 sInstance = Room.databaseBuilder(
-                        context, BakingAppDatabase.class, DB_NAME)
+                        context, BakingDatabase.class, DB_NAME)
                         .fallbackToDestructiveMigration()
                         .build();
                 Log.d(LOG_TAG, "Database instance created.");
@@ -37,7 +40,6 @@ public abstract class BakingAppDatabase extends RoomDatabase {
         return sInstance;
     }
 
-
-
+    public abstract BakingDao bakingDao();
 
 }
