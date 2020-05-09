@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Wrapper class around Retrofit library.
  *
  */
-public final class RetrofitClient {
+final class RetrofitClient {
 
     private static final String LOG_TAG = RetrofitClient.class.getSimpleName();
     private static final String INSTANCE_CREATED = LOG_TAG + " instance created.";
@@ -37,7 +37,7 @@ public final class RetrofitClient {
             .build();
     }
 
-    public static RetrofitClient getInstance(Context context) {
+    static RetrofitClient getInstance(Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
                 sInstance = new RetrofitClient(context);
@@ -58,7 +58,7 @@ public final class RetrofitClient {
         return GsonConverterFactory.create(gsonBuilder.create());
     }
 
-    public BakingNetworkAPI getNetworkService() {
+    BakingNetworkAPI getNetworkService() {
         return mRetrofit.create(BakingNetworkAPI.class);
     }
 }

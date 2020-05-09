@@ -24,18 +24,17 @@ public final class BakingRepository {
     private static BakingDao mDao;
     private static BakingDataSource mDataSource;
     private static AppExecutors mExecutors;
-    private boolean isDataCached = false;
 
     private BakingRepository(BakingDao bakingDao, BakingDataSource bakingDataSource, AppExecutors appExecutors) {
         mDao = bakingDao;
         mDataSource = bakingDataSource;
         mExecutors = appExecutors;
 
-        mDataSource.getRecipes().observeForever(recipes -> {
-                mDao.deleteAllRecipes();
-                mDao.insertRecipes(recipes);
-                isDataCached = true;
-        });
+        mDataSource.getRecipes().observeForever(recipes -> mExecutors.getDiskExecutor().execute(() -> {
+            mDao.deleteAllRecipes();
+            mDao.insertRecipes(recipes);
+            Log.d(LOG_TAG, "Recipes inserted into database.");
+        }));
     }
 
     public static BakingRepository getInstance(BakingDao bakingDao, BakingDataSource bakingDataSource, AppExecutors appExecutors) {
@@ -49,25 +48,23 @@ public final class BakingRepository {
         return sInstance;
     }
 
-
     public LiveData<List<Recipe>> getRecipes() {
-            // TODO re check logic.
-            if (!isDataCached || !isDataCached()) {
-                mExecutors.getNetworkExecutor().execute(() -> {
-                        mDataSource.fetchRecipeData(); });
+            if (!isDataCached()) {
+                mExecutors.getNetworkExecutor().execute(() -> mDataSource.fetchRecipeData());
             }
 
             return mDao.getRecipes();
     }
 
-
     public LiveData<Recipe> getRecipeById(int recipeId) {
         return mDao.getRecipeById(recipeId);
     }
 
+    // TODO Fix CHECK CACHE LOGIC
     private boolean isDataCached() {
-        mExecutors.getDiskExecutor().execute(() -> isDataCached = mDao.getRecipeCount() > 0);
-        return isDataCached;
-    }
+//        mExecutors.getDiskExecutor().execute(() -> {\
+//        });
 
+        return false;
+    }
 }

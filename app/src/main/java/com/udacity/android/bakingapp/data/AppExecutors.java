@@ -38,11 +38,11 @@ public final class AppExecutors {
         return sInstance;
     }
 
-    public Executor getDiskExecutor() {
+    Executor getDiskExecutor() {
         return mDiskExecutor;
     }
 
-    public Executor getNetworkExecutor() {
+    Executor getNetworkExecutor() {
         return mNetworkExecutor;
     }
 }

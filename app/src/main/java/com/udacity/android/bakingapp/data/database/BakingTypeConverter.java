@@ -1,8 +1,8 @@
 package com.udacity.android.bakingapp.data.database;
 
-import com.google.gson.Gson;
 import androidx.room.TypeConverter;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.udacity.android.bakingapp.model.Ingredient;
 import com.udacity.android.bakingapp.model.Step;
@@ -15,7 +15,7 @@ public class BakingTypeConverter {
     /**
      * Converts a list of ingredients to Json representation.
      *
-     * @param ingredients
+     * @param ingredients list of ingredient in object form.
      * @return string of ingredients.
      */
     @TypeConverter
@@ -26,7 +26,7 @@ public class BakingTypeConverter {
     /**
      * Converts a String representation of ingredients into a list.
      *
-     * @param ingredients
+     * @param ingredients list of ingredients in String form.
      * @return list of ingredients.
      */
     @TypeConverter
@@ -39,7 +39,7 @@ public class BakingTypeConverter {
     /**
      * Converts a list of ingredients to Json representation.
      *
-     * @param steps
+     * @param steps list of steps in object form.
      * @return string of steps.
      */
     @TypeConverter
@@ -50,7 +50,7 @@ public class BakingTypeConverter {
     /**
      * Converts a String representation of steps into a list.
      *
-     * @param steps
+     * @param steps list of steps in String form.
      * @return list of steps.
      */
     @TypeConverter

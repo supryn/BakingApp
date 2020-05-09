@@ -12,7 +12,7 @@ import java.util.List;
  * View Model class for Main Activity.
  *
  */
-public class MainActivityViewModel extends ViewModel {
+class MainActivityViewModel extends ViewModel {
 
     private LiveData<List<Recipe>> mRecipes;
 

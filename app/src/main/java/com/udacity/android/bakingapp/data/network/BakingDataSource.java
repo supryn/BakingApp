@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public final class BakingDataSource {
 
-    public static final String BAKING_APP_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
+    static final String BAKING_APP_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
     private static final String JSON_FILE_NAME = "baking.json";
 
     private static final String LOG_TAG = BakingDataSource.class.getSimpleName();
@@ -35,7 +35,7 @@ public final class BakingDataSource {
         mRecipes = new MutableLiveData<>();
     }
 
-    public static synchronized BakingDataSource getInstance(Context context) {
+    public static BakingDataSource getInstance(Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
                 sInstance = new BakingDataSource(context);

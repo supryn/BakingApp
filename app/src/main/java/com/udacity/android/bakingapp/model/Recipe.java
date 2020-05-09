@@ -2,6 +2,7 @@ package com.udacity.android.bakingapp.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -10,7 +11,7 @@ import com.udacity.android.bakingapp.data.database.BakingTypeConverter;
 import java.util.List;
 
 @Entity(tableName = "recipe_table")
-public class Recipe {
+public class Recipe implements RecipeUmbrella {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -37,6 +38,16 @@ public class Recipe {
 
     public Recipe(int id, int recipeId, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
         this.id = id;
+        this.recipeId = recipeId;
+        this.name = name;
+        this.servings = servings;
+        this.image = image;
+        this.ingredients = ingredients;
+        this.steps = steps;
+    }
+
+    @Ignore
+    public Recipe(int recipeId, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
         this.recipeId = recipeId;
         this.name = name;
         this.servings = servings;

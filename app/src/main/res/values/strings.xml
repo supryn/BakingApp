@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Baking App</string>
+
+
+
+    <!-- JSON String Resources -->
+    <string name="json_recipe_id">id</string>
+    <string name="json_recipe_name">name</string>
+    <string name="json_recipe_ingredients">ingredients</string>
+    <string name="json_recipe_steps">steps</string>
+    <string name="json_recipe_servings">servings</string>
+    <string name="json_recipe_image">image</string>
+    <string name="json_ingredient_quantity">quantity</string>
+    <string name="json_ingredient_measure">measure</string>
+    <string name="json_ingredient_name">ingredient</string>
+    <string name="json_step_stepId">id</string>
+    <string name="json_step_shortDescription">shortDescription</string>
+    <string name="json_step_description">description</string>
+    <string name="json_step_video_url">videoURL</string>
+    <string name="json_step_thumbnail_url">thumbnailURL</string>
+
+
 </resources>

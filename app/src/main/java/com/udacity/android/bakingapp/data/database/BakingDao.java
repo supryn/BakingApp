@@ -29,9 +29,8 @@ public interface BakingDao {
 
     /**
      * Gets a specific recipe by its id.
-     *
-     * @param recipeId
-     * @return Recipe
+     * @param recipeId recipeId.
+     * @return list of recipes.
      */
     @Query("SELECT * FROM recipe_table WHERE recipe_id = :recipeId")
     LiveData<Recipe> getRecipeById(int recipeId);
@@ -40,7 +39,7 @@ public interface BakingDao {
 
     /**
      * Inserts a bulk of recipes.
-     * @param recipes
+     * @param recipes recipe objects
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipes(List<Recipe> recipes);
