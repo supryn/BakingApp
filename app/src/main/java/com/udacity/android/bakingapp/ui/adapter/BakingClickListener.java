@@ -4,5 +4,5 @@ import com.udacity.android.bakingapp.model.RecipeUmbrella;
 
 public interface BakingClickListener {
 
-    public void onClick(RecipeUmbrella recipeType);
+    void onClick(RecipeUmbrella recipeType);
 }

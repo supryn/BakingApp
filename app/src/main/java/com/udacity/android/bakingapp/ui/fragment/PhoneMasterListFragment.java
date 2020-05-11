@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 
-public class PhoneRecipeMasterListFragment extends BaseRecipeMasterListFragment {
+/**
+ * A Master list Fragment handling phone based configurations.
+ */
+public class PhoneMasterListFragment extends BaseMasterListFragment {
 
 
     @Override
@@ -21,8 +24,4 @@ public class PhoneRecipeMasterListFragment extends BaseRecipeMasterListFragment 
         return R.string.app_adapter_recipes_phone;
     }
 
-    @Override
-    public void onClick(RecipeUmbrella recipeType) {
-
-    }
 }
