@@ -12,6 +12,11 @@ import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Base Recipe List Processor class that parses the json data of both the list of ingredients and steps, and returns a list with a type corresponding to its appropriate model object.
+ *
+ * @param <T>
+ */
 abstract class BaseRecipeListProcessor<T extends RecipeUmbrella> {
 
     private static final String NO_LIST_PROCESSOR_FOUND = "No concrete list processor found with resourceId: ";

@@ -18,6 +18,7 @@ public final class BakingRepository {
 
     private static final String LOG_TAG = BakingRepository.class.getSimpleName();
     private static final String INSTANCE_CREATED = LOG_TAG + " instance created.";
+    private static final String RECIPES_INSERTED = "Recipes inserted into database.";
     private static final Object LOCK = new Object();
 
     private static BakingRepository sInstance;
@@ -33,7 +34,7 @@ public final class BakingRepository {
         mDataSource.getRecipes().observeForever(recipes -> mExecutors.getDiskExecutor().execute(() -> {
             mDao.deleteAllRecipes();
             mDao.insertRecipes(recipes);
-            Log.d(LOG_TAG, "Recipes inserted into database.");
+            Log.d(LOG_TAG, RECIPES_INSERTED);
         }));
     }
 

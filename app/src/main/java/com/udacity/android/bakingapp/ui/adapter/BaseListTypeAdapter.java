@@ -34,6 +34,8 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         return createListViewHolder(DataBindingUtil.inflate(
                 inflater,
+                // TODO check if two layouts (1 for phone & 1 for tablet) are needed.
+                // need to extract anyway once a StepListTypeAdapter & IngredientListTypeAdapter are added.
                 R.layout.recipe_list_item_phone,
                 viewGroup,
                 false));
