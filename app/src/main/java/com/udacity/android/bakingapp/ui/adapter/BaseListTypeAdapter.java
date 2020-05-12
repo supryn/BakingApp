@@ -66,8 +66,9 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
 
     abstract class BaseListTypeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public BaseListTypeViewHolder(@NonNull View itemView) {
+        public BaseListTypeViewHolder(@NonNull View itemView, ViewDataBinding binding) {
             super(itemView);
+            binding.getRoot().setOnClickListener(this);
         }
 
         abstract void bind(T data);

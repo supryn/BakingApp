@@ -12,10 +12,8 @@ public class ListTypeAdapterFactory {
 
     public static BaseListTypeAdapter create(int layoutResId, BakingClickListener clickListener) {
         switch (layoutResId) {
-            case R.string.app_adapter_recipes_phone:
-                return new PhoneListTypeAdapter(clickListener);
-            case R.string.app_adapter_recipes_tablet:
-                return new TabletListTypeAdapter(clickListener);
+            case R.string.app_adapter_recipes:
+                return new RecipeListTypeAdapter(clickListener);
             default:
                 return null;
 

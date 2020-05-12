@@ -6,4 +6,6 @@ package com.udacity.android.bakingapp.model;
 
 public interface RecipeUmbrella {
 
+    public int getId();
+
 }

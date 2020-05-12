@@ -5,13 +5,10 @@
     <string name="serving_size_label">Serving Size:</string>
 
 
-    <string name="app_master_list_fragment_phone">phone</string>
-    <string name="app_master_list_fragment_tablet">tablet</string>
 
-
+    <string name="app_adapter_recipes">recipes</string>
     <string name="app_adapter_steps">steps</string>
-    <string name="app_adapter_recipes_phone">phone</string>
-    <string name="app_adapter_recipes_tablet">tablet</string>
+
 
 
     <!-- JSON String Resources -->

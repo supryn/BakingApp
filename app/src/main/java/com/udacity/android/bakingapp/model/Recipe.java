@@ -55,4 +55,9 @@ public class Recipe implements RecipeUmbrella {
         this.ingredients = ingredients;
         this.steps = steps;
     }
+
+    @Override
+    public int getId() {
+        return recipeId;
+    }
 }

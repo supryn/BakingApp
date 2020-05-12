@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.udacity.android.bakingapp.R;
-import com.udacity.android.bakingapp.model.RecipeUmbrella;
 
 /**
  * A Master list Fragment handling phone based configurations.
@@ -21,7 +20,7 @@ public class PhoneMasterListFragment extends BaseMasterListFragment {
 
     @Override
     int getAdapterResId() {
-        return R.string.app_adapter_recipes_phone;
+        return R.string.app_adapter_recipes;
     }
 
 }

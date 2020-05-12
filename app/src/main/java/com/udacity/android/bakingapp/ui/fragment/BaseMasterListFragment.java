@@ -1,5 +1,6 @@
 package com.udacity.android.bakingapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,12 @@ import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
 import com.udacity.android.bakingapp.ui.adapter.BaseListTypeAdapter;
 import com.udacity.android.bakingapp.ui.adapter.ListTypeAdapterFactory;
+import com.udacity.android.bakingapp.ui.detail.DetailActivity;
 import com.udacity.android.bakingapp.ui.main.MainActivityViewModel;
 import com.udacity.android.bakingapp.ui.main.MainActivityViewModelFactory;
 import com.udacity.android.bakingapp.utility.ViewModelInjectUtil;
+
+import static com.udacity.android.bakingapp.ui.detail.DetailActivity.RECIPE_ID_KEY;
 
 /**
  * Base Master List Fragment to display list of recipes on phones or tablets.
@@ -43,7 +47,9 @@ public abstract class BaseMasterListFragment extends Fragment implements BakingC
 
     @Override
     public void onClick(RecipeUmbrella recipeType) {
-
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(RECIPE_ID_KEY, recipeType.getId());
+        startActivity(intent);
     }
 
     private void setupRecyclerView(View view, RecyclerView.Adapter adapter) {

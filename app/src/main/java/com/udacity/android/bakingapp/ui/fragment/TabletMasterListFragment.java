@@ -22,7 +22,7 @@ public class TabletMasterListFragment extends BaseMasterListFragment {
 
     @Override
     int getAdapterResId() {
-        return R.string.app_adapter_recipes_tablet;
+        return R.string.app_adapter_recipes;
     }
 
 

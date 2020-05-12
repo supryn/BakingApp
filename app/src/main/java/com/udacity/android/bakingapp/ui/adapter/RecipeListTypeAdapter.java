@@ -6,28 +6,28 @@ import com.udacity.android.bakingapp.databinding.RecipeListItemPhoneBinding;
 import com.udacity.android.bakingapp.model.Recipe;
 
 /**
- * A list type adapter binding and creating view holders with recipe data on phone configurations.
+ * A list type adapter binding and creating view holders with recipe data.
  *
  */
-class PhoneListTypeAdapter extends BaseListTypeAdapter<Recipe> {
+class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
 
 
-    PhoneListTypeAdapter(BakingClickListener clickListener) {
+    RecipeListTypeAdapter(BakingClickListener clickListener) {
         super(clickListener);
     }
 
     @Override
     BaseListTypeViewHolder createListViewHolder(ViewDataBinding binding) {
-        return new PhoneListTypeViewHolder((RecipeListItemPhoneBinding) binding);
+        return new RecipeListTypeViewHolder(binding);
     }
 
-    class PhoneListTypeViewHolder extends BaseListTypeViewHolder {
+    class RecipeListTypeViewHolder extends BaseListTypeViewHolder {
 
         RecipeListItemPhoneBinding mBinding;
 
-        public PhoneListTypeViewHolder(RecipeListItemPhoneBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
+        public RecipeListTypeViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot(), binding);
+            mBinding = (RecipeListItemPhoneBinding) binding;
         }
 
         @Override

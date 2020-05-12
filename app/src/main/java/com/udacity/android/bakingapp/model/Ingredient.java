@@ -33,4 +33,10 @@ public class Ingredient implements RecipeUmbrella {
         this.measure = measure;
         this.item = item;
     }
+
+    // An ingredient isn't in scope of the recyclerview / adapter like Recipe and Step are, thus its never used.
+    @Override
+    public int getId() {
+        return 0;
+    }
 }

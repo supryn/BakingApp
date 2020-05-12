@@ -44,4 +44,9 @@ public class Step implements RecipeUmbrella {
         this.videoUrl = videoUrl;
         this.thumbnailUrl = thumbnailUrl;
     }
+
+    @Override
+    public int getId() {
+        return stepId;
+    }
 }
