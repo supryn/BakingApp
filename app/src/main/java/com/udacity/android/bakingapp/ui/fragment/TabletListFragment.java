@@ -6,13 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.udacity.android.bakingapp.R;
-import com.udacity.android.bakingapp.model.RecipeUmbrella;
 
 /**
  * A Master list Fragment handling tablet based configurations.
  */
-public class TabletMasterListFragment extends BaseMasterListFragment {
-
+public class TabletListFragment extends BaseMainListFragment {
 
     @Override
     RecyclerView.LayoutManager getLayoutManager(View view) {
@@ -24,6 +22,5 @@ public class TabletMasterListFragment extends BaseMasterListFragment {
     int getAdapterResId() {
         return R.string.app_adapter_recipes;
     }
-
 
 }

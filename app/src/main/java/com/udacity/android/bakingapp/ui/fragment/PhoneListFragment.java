@@ -10,7 +10,7 @@ import com.udacity.android.bakingapp.R;
 /**
  * A Master list Fragment handling phone based configurations.
  */
-public class PhoneMasterListFragment extends BaseMasterListFragment {
+public class PhoneListFragment extends BaseMainListFragment {
 
 
     @Override
@@ -22,5 +22,4 @@ public class PhoneMasterListFragment extends BaseMasterListFragment {
     int getAdapterResId() {
         return R.string.app_adapter_recipes;
     }
-
 }

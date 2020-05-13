@@ -2,6 +2,7 @@ package com.udacity.android.bakingapp.ui.adapter;
 
 import androidx.databinding.ViewDataBinding;
 
+import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.databinding.RecipeListItemPhoneBinding;
 import com.udacity.android.bakingapp.model.Recipe;
 
@@ -17,6 +18,11 @@ class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
     }
 
     @Override
+    int getLayoutResId() {
+        return R.layout.recipe_list_item_phone;
+    }
+
+    @Override
     BaseListTypeViewHolder createListViewHolder(ViewDataBinding binding) {
         return new RecipeListTypeViewHolder(binding);
     }
@@ -25,8 +31,9 @@ class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
 
         RecipeListItemPhoneBinding mBinding;
 
-        public RecipeListTypeViewHolder(ViewDataBinding binding) {
-            super(binding.getRoot(), binding);
+        RecipeListTypeViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            binding.getRoot().setOnClickListener(this);
             mBinding = (RecipeListItemPhoneBinding) binding;
         }
 

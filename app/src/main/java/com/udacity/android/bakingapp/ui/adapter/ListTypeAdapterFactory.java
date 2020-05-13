@@ -16,6 +16,10 @@ public class ListTypeAdapterFactory {
         switch (layoutResId) {
             case R.string.app_adapter_recipes:
                 return new RecipeListTypeAdapter(clickListener);
+            case R.string.app_adapter_ingredients:
+                return new IngredientListTypeAdapter(clickListener);
+            case R.string.app_adapter_steps:
+                return new StepListTypeAdapter(clickListener);
             default:
                 throw new RuntimeException(LIST_TYPE_ADAPTER_MSG + layoutResId + NOT_FOUND);
         }

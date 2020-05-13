@@ -32,11 +32,10 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
     @Override
     public BaseListTypeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+
         return createListViewHolder(DataBindingUtil.inflate(
                 inflater,
-                // TODO check if two layouts (1 for phone & 1 for tablet) are needed.
-                // need to extract anyway once a StepListTypeAdapter & IngredientListTypeAdapter are added.
-                R.layout.recipe_list_item_phone,
+                getLayoutResId(),
                 viewGroup,
                 false));
     }
@@ -51,6 +50,8 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
     public int getItemCount() {
         return mDataList == null ? 0 : mDataList.size();
     }
+
+    abstract int getLayoutResId();
 
     public void swapData(List<T> newData) {
         mDataList = newData;
@@ -68,9 +69,8 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
 
     abstract class BaseListTypeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public BaseListTypeViewHolder(@NonNull View itemView, ViewDataBinding binding) {
+        BaseListTypeViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding.getRoot().setOnClickListener(this);
         }
 
         abstract void bind(T data);

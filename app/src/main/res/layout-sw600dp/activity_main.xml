@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/master_list_fragment"
-        android:name="com.udacity.android.bakingapp.ui.fragment.TabletMasterListFragment"
+        android:name="com.udacity.android.bakingapp.ui.fragment.TabletListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

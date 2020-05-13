@@ -7,9 +7,18 @@
 
 
     <string name="app_adapter_recipes">recipes</string>
+    <string name="app_adapter_ingredients">ingredients</string>
     <string name="app_adapter_steps">steps</string>
 
+    <string name="app_ingredient_fragment">ingredient</string>
+    <string name="app_step_fragment">step</string>
 
+    <string name="ui_ingredients_button_label">Ingredients</string>
+    <string name="ui_steps_button_label">Steps</string>
+    <string name="ui_ingredient_label">Ingredient:</string>
+    <string name="ui_step_label">Step:</string>
+    <string name="ui_ingredient_measure_label">Measure:</string>
+    <string name="ui_ingredient_quantity_label">Quantity:</string>
 
     <!-- JSON String Resources -->
     <string name="json_recipe_id">id</string>
