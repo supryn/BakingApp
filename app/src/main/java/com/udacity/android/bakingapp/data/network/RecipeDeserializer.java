@@ -46,10 +46,10 @@ public class RecipeDeserializer implements JsonDeserializer<List<Recipe>> {
             String jsonRecipeImage = BaseRecipeListProcessor.checkEmptyString(jsonRecipeImagePrimitive);
 
             JsonArray jsonIngredients = jsonRecipe.getAsJsonArray(getStringResource(R.string.json_recipe_ingredients));
-            List ingredients = ingredientListProcessor.processRecipeListItems(jsonIngredients);
+            List ingredients = ingredientListProcessor.processRecipeListItems(recipeId, jsonIngredients);
 
             JsonArray jsonSteps = jsonRecipe.getAsJsonArray(getStringResource(R.string.json_recipe_steps));
-            List steps = stepListProcessor.processRecipeListItems(jsonSteps);
+            List steps = stepListProcessor.processRecipeListItems(recipeId, jsonSteps);
 
             recipes.add(new Recipe(recipeId, recipeName, recipeServings, jsonRecipeImage, ingredients, steps));
         }

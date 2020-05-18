@@ -13,9 +13,7 @@ import java.util.List;
 @Entity(tableName = "recipe_table")
 public class Recipe implements RecipeUmbrella {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-
+    @PrimaryKey
     @ColumnInfo(name = "recipe_id")
     public int recipeId;
 
@@ -36,17 +34,7 @@ public class Recipe implements RecipeUmbrella {
     @TypeConverters(BakingTypeConverter.class)
     public List<Step> steps;
 
-    public Recipe(int id, int recipeId, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
-        this.id = id;
-        this.recipeId = recipeId;
-        this.name = name;
-        this.servings = servings;
-        this.image = image;
-        this.ingredients = ingredients;
-        this.steps = steps;
-    }
 
-    @Ignore
     public Recipe(int recipeId, String name, int servings, String image, List<Ingredient> ingredients, List<Step> steps) {
         this.recipeId = recipeId;
         this.name = name;

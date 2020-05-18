@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.Recipe;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
+import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
 import com.udacity.android.bakingapp.ui.adapter.BaseListTypeAdapter;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModel;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModelFactory;
@@ -17,19 +18,25 @@ import com.udacity.android.bakingapp.utility.ViewModelInjectUtil;
 
 import java.util.List;
 
+/**
+ * Base Detail List Fragment responsible for providing concrete detail list fragment instances,
+ * and providing data from the detail activity view model to them.
+ *
+ * @param <T>
+ */
 public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends BaseListFragment {
 
 
     static final String RECIPE_ID_KEY = "recipe_id_key";
 
-    public static BaseDetailListFragment getInstance(int resId, int recipeId) {
+    public static BaseDetailListFragment getInstance(BakingClickListener clickListener, int resId, int recipeId) {
         BaseDetailListFragment fragment;
         switch (resId) {
             case R.string.app_ingredient_fragment:
                 fragment = new IngredientListFragment();
                 break;
             case R.string.app_step_fragment:
-                fragment = new StepListFragment();
+                fragment = new StepListFragment(clickListener);
                 break;
             default:
                 throw new IllegalStateException("Unexpected fragment: " + resId);

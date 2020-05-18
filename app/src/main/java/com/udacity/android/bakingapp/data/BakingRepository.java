@@ -49,6 +49,10 @@ public final class BakingRepository {
         return sInstance;
     }
 
+    /**
+     * Returns all the recipes saved in cache.
+     * @return List of Recipes.
+     */
     public LiveData<List<Recipe>> getRecipes() {
             if (!isDataCached()) {
                 mExecutors.getNetworkExecutor().execute(() -> mDataSource.fetchRecipeData());
@@ -57,9 +61,15 @@ public final class BakingRepository {
             return mDao.getRecipes();
     }
 
+    /**
+     * Returns a specific Recipe based on its id.
+     * @param recipeId A Recipe id.
+     * @return A specific Recipe.
+     */
     public LiveData<Recipe> getRecipeById(int recipeId) {
         return mDao.getRecipeById(recipeId);
     }
+
 
     // TODO Fix CHECK CACHE LOGIC
     private boolean isDataCached() {

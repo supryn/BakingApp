@@ -18,6 +18,7 @@
             android:layout_height="match_parent"
             android:text="@string/ui_ingredients_button_label"
             android:backgroundTint="@android:color/white"
+            style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/holo_blue_light"
             app:layout_constraintRight_toLeftOf="@id/view_divider"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -32,16 +33,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@android:color/darker_gray"
-            />
+            android:background="@android:color/darker_gray" />
 
         <Button
             android:id="@+id/steps_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/ui_steps_button_label"
-            android:background="@drawable/custom_botton"
+            android:backgroundTint="@android:color/white"
             android:textColor="@android:color/holo_blue_light"
+            style="?android:attr/borderlessButtonStyle"
             app:layout_constraintLeft_toRightOf="@id/view_divider"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

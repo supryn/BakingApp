@@ -10,13 +10,13 @@ import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModelFactory;
 import com.udacity.android.bakingapp.ui.main.MainActivityViewModelFactory;
 
 /**
- *  Utility class providing view models to their respective activities.
+ *  Utility class providing view models to their respective activities/fragments.
  *
  */
 public final class ViewModelInjectUtil {
 
-    public static DetailActivityViewModelFactory provideDetailActivityViewModelFactory(Context context, int movieId) {
-        return new DetailActivityViewModelFactory(getRepository(context), movieId);
+    public static DetailActivityViewModelFactory provideDetailActivityViewModelFactory(Context context, int recipeId) {
+        return new DetailActivityViewModelFactory(getRepository(context), recipeId);
     }
 
     public static MainActivityViewModelFactory provideMainActivityViewModelFactory(Context context) {

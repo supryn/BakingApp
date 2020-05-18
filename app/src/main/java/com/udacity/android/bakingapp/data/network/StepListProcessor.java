@@ -9,13 +9,14 @@ import com.udacity.android.bakingapp.model.Step;
 
 class StepListProcessor extends BaseRecipeListProcessor<Step> {
 
+    private static final int STEP_NUMBER_SET_OFF = 1;
 
     StepListProcessor(Context context) {
         super(context);
     }
 
     @Override
-    Step buildRecipeListItem(JsonObject recipeListItem) {
+    Step buildRecipeListItem(int recipeId, JsonObject recipeListItem) {
         int stepId = recipeListItem.get(getStringResource(R.string.json_step_stepId)).getAsInt();
         String shortDescription = recipeListItem.get(getStringResource(R.string.json_step_shortDescription)).getAsString();
         String description = recipeListItem.get(getStringResource(R.string.json_step_description)).getAsString();
@@ -26,6 +27,6 @@ class StepListProcessor extends BaseRecipeListProcessor<Step> {
         JsonPrimitive jsonThumbnailUrlPrimitive = recipeListItem.getAsJsonPrimitive(getStringResource(R.string.json_step_thumbnail_url));
         String thumbnailUrl = checkEmptyString(jsonThumbnailUrlPrimitive);
 
-        return new Step(stepId, shortDescription, description, videoUrl, thumbnailUrl);
+        return new Step(recipeId, stepId + STEP_NUMBER_SET_OFF, shortDescription, description, videoUrl, thumbnailUrl);
     }
 }

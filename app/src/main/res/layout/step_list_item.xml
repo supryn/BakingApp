@@ -9,7 +9,52 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/step_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_step_label"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintTop_toBottomOf="@id/step_button"
+            app:layout_constraintBottom_toTopOf="@id/step_button"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/step_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:text="@{Integer.toString(step.id)}"
+            tools:text="1"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintTop_toBottomOf="@id/step_label"
+            app:layout_constraintBottom_toTopOf="@id/step_label"
+            app:layout_constraintLeft_toRightOf="@id/step_label"/>
+
+        <TextView
+            android:id="@+id/step_short_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:text="@{step.shortDescription}"
+            tools:text="This is a short description of the current step."
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/step_label"
+            app:layout_constraintBottom_toTopOf="@id/step_label"
+            app:layout_constraintLeft_toRightOf="@id/step_number"
+            app:layout_constraintRight_toLeftOf="@id/step_button"/>
+
+        <Button
+            android:id="@+id/step_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GO"
+            android:textColor="@android:color/holo_blue_light"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -59,7 +59,8 @@ public interface BakingDao {
      *
      * @return count of recipes in database
      */
-    @Query("SELECT COUNT(id) FROM recipe_table")
+    @Query("SELECT COUNT(recipe_id) FROM recipe_table")
     int getRecipeCount();
+
 
 }

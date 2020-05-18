@@ -13,7 +13,7 @@ class IngredientListProcessor extends BaseRecipeListProcessor<Ingredient> {
     }
 
     @Override
-    Ingredient buildRecipeListItem(JsonObject recipeListItem) {
+    Ingredient buildRecipeListItem(int recipeId, JsonObject recipeListItem) {
         int quantity = recipeListItem.get(getStringResource(R.string.json_ingredient_quantity)).getAsInt();
         String measure = recipeListItem.get(getStringResource(R.string.json_ingredient_measure)).getAsString();
         String ingredient = recipeListItem.get(getStringResource(R.string.json_ingredient_name)).getAsString();

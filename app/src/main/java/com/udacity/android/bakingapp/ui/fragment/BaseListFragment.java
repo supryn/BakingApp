@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
 import com.udacity.android.bakingapp.ui.adapter.BaseListTypeAdapter;
@@ -18,7 +19,7 @@ import com.udacity.android.bakingapp.ui.adapter.ListTypeAdapterFactory;
 
 
 /**
- * Base Master List Fragment to display list of recipes on phones or tablets.
+ * Base Master List fragment serves to create Views specifically for lists.
  *
  */
 public abstract class BaseListFragment extends Fragment {
@@ -32,6 +33,8 @@ public abstract class BaseListFragment extends Fragment {
         BaseListTypeAdapter adapter = ListTypeAdapterFactory.create(getAdapterResId(), getClickListener());
         setupRecyclerView(view, adapter);
         observeData(view, adapter, getRecipeId(getArguments()));
+
+
 
         return view;
     }

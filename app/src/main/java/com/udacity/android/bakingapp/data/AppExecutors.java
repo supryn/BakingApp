@@ -38,7 +38,7 @@ public final class AppExecutors {
         return sInstance;
     }
 
-    Executor getDiskExecutor() {
+    public Executor getDiskExecutor() {
         return mDiskExecutor;
     }
 

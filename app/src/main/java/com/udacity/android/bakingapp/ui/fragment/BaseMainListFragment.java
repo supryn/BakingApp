@@ -16,6 +16,7 @@ import com.udacity.android.bakingapp.utility.ViewModelInjectUtil;
 import static com.udacity.android.bakingapp.ui.detail.DetailActivity.RECIPE_ID_KEY;
 
 /**
+ *  Base Main List Fragment provides data from the Main Activity View Model to its concrete implementation classes.
  *
  */
 public abstract class BaseMainListFragment extends BaseListFragment implements BakingClickListener  {

@@ -12,15 +12,15 @@ import com.udacity.android.bakingapp.data.BakingRepository;
 public class DetailActivityViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final BakingRepository mRepository;
-    private int mMovieId;
+    private int mRecipeId;
 
-    public DetailActivityViewModelFactory(BakingRepository repository, int movieId) {
+    public DetailActivityViewModelFactory(BakingRepository repository, int recipeId) {
         mRepository = repository;
-        mMovieId = movieId;
+        mRecipeId = recipeId;
     }
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        return (T) new DetailActivityViewModel(mRepository, mMovieId);
+        return (T) new DetailActivityViewModel(mRepository, mRecipeId);
     }
 }

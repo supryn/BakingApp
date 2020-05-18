@@ -51,7 +51,8 @@ public final class BakingDataSource {
                 .getNetworkService()
                 .fetchRecipes(JSON_FILE_NAME)
                 .subscribeOn(Schedulers.io())
-                .subscribe(recipes -> mRecipes.postValue(recipes));
+                .subscribe(recipes ->
+                        mRecipes.postValue(recipes));
     }
 
 

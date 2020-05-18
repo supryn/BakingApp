@@ -40,17 +40,17 @@ abstract class BaseRecipeListProcessor<T extends RecipeUmbrella> {
 
     }
 
-    List<T> processRecipeListItems(JsonArray jsonRecipeListItems) {
+    List<T> processRecipeListItems(int recipeId, JsonArray jsonRecipeListItems) {
         List<T> mRecipeListItems = new ArrayList<>();
         for (JsonElement jsonElement : jsonRecipeListItems) {
             JsonObject recipeListItem = jsonElement.getAsJsonObject();
-            mRecipeListItems.add(buildRecipeListItem(recipeListItem));
+            mRecipeListItems.add(buildRecipeListItem(recipeId, recipeListItem));
         }
 
         return mRecipeListItems;
     }
 
-    abstract T buildRecipeListItem(JsonObject recipeListItem);
+    abstract T buildRecipeListItem(int recipeId, JsonObject recipeListItem);
 
     String getStringResource(int resId) {
         return mContext.getString(resId);

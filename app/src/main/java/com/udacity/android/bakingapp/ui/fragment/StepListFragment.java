@@ -10,7 +10,11 @@ import java.util.List;
 
 public class StepListFragment extends BaseDetailListFragment<Step> implements BakingClickListener {
 
+    private BakingClickListener mStepClickListener;
 
+    public StepListFragment(BakingClickListener clickListener) {
+        mStepClickListener = clickListener;
+    }
 
     @Override
     int getAdapterResId() {
@@ -30,6 +34,6 @@ public class StepListFragment extends BaseDetailListFragment<Step> implements Ba
 
     @Override
     public void onClick(RecipeUmbrella recipeType) {
-
+        mStepClickListener.onClick(recipeType);
     }
 }
