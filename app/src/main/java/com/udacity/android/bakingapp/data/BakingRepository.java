@@ -54,10 +54,7 @@ public final class BakingRepository {
      * @return List of Recipes.
      */
     public LiveData<List<Recipe>> getRecipes() {
-            if (!isDataCached()) {
-                mExecutors.getNetworkExecutor().execute(() -> mDataSource.fetchRecipeData());
-            }
-
+            checkCache();
             return mDao.getRecipes();
     }
 
@@ -71,11 +68,11 @@ public final class BakingRepository {
     }
 
 
-    // TODO Fix CHECK CACHE LOGIC
-    private boolean isDataCached() {
-//        mExecutors.getDiskExecutor().execute(() -> {\
-//        });
-
-        return false;
+    private void checkCache() {
+        mExecutors.getDiskExecutor().execute(() -> {
+            if (mDao.getRecipeCount() == 0) {
+                mDataSource.fetchRecipeData();
+            }
+        });
     }
 }

@@ -14,8 +14,8 @@
 
         <Button
             android:id="@+id/ingredients_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="@string/ui_ingredients_button_label"
             android:backgroundTint="@android:color/white"
             style="?android:attr/borderlessButtonStyle"
@@ -37,8 +37,8 @@
 
         <Button
             android:id="@+id/steps_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="@string/ui_steps_button_label"
             android:backgroundTint="@android:color/white"
             android:textColor="@android:color/holo_blue_light"

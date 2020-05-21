@@ -34,8 +34,6 @@ public abstract class BaseListFragment extends Fragment {
         setupRecyclerView(view, adapter);
         observeData(view, adapter, getRecipeId(getArguments()));
 
-
-
         return view;
     }
 
@@ -51,10 +49,8 @@ public abstract class BaseListFragment extends Fragment {
 
     abstract int getAdapterResId();
 
-    // the reason for this abstraction is because every fragment requires to register a click listener when creating an adapter for recycler for in the BaseListFragment,
-    // but the only one that doesn't is IngredientListFragment, so pushing definition down to its concrete classes.
+    // the reason for this abstraction is to show clear definition that a IngredientListFragment is not clickable,
     abstract BakingClickListener getClickListener();
-
 
     private int getRecipeId(Bundle bundle) {
         if (bundle != null) {

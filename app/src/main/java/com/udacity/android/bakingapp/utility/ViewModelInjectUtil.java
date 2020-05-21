@@ -23,6 +23,7 @@ public final class ViewModelInjectUtil {
         return new MainActivityViewModelFactory(getRepository(context));
     }
 
+    // this would be used when needing to instantiate the appropriate objects for running a deferred task with something like WorkManager.
     public static BakingDataSource provideBakingDataSource(Context context) {
         getRepository(context);
         return BakingDataSource.getInstance(context);

@@ -12,6 +12,8 @@ public class StepListFragment extends BaseDetailListFragment<Step> implements Ba
 
     private BakingClickListener mStepClickListener;
 
+    public StepListFragment() { }
+
     public StepListFragment(BakingClickListener clickListener) {
         mStepClickListener = clickListener;
     }
@@ -30,7 +32,6 @@ public class StepListFragment extends BaseDetailListFragment<Step> implements Ba
     List<Step> getItemList(Recipe recipe) {
         return recipe.steps;
     }
-
 
     @Override
     public void onClick(RecipeUmbrella recipeType) {

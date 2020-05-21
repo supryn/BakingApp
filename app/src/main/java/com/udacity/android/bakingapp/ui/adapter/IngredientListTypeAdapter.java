@@ -31,7 +31,6 @@ public class IngredientListTypeAdapter extends BaseListTypeAdapter<Ingredient> {
 
         IngredientListTypeViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
-            // register click handling event with binding here
             // since ingredients don't need a click, leaving click event unregistered.
             mBinding = (IngredientListItemBinding) binding;
         }

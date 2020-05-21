@@ -10,6 +10,7 @@ import com.udacity.android.bakingapp.model.Step;
 class StepListProcessor extends BaseRecipeListProcessor<Step> {
 
     private static final int STEP_NUMBER_SET_OFF = 1;
+    private static final int DESCRIPTION_BEGIN_INDEX = 3;
 
     StepListProcessor(Context context) {
         super(context);
@@ -27,6 +28,11 @@ class StepListProcessor extends BaseRecipeListProcessor<Step> {
         JsonPrimitive jsonThumbnailUrlPrimitive = recipeListItem.getAsJsonPrimitive(getStringResource(R.string.json_step_thumbnail_url));
         String thumbnailUrl = checkEmptyString(jsonThumbnailUrlPrimitive);
 
-        return new Step(recipeId, stepId + STEP_NUMBER_SET_OFF, shortDescription, description, videoUrl, thumbnailUrl);
+        return new Step(recipeId, stepId + STEP_NUMBER_SET_OFF, shortDescription, parseDescription(stepId, description), videoUrl, thumbnailUrl);
+    }
+
+    // used to remove the step number in the description field from every step other than the first one
+    private String parseDescription(int stepId, String description) {
+        return stepId != 0 ? description.substring(DESCRIPTION_BEGIN_INDEX) : description;
     }
 }
