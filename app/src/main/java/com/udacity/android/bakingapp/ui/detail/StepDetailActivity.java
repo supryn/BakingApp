@@ -24,15 +24,21 @@ public class StepDetailActivity extends AppCompatActivity {
         mStepId = getIntent().getIntExtra(STEP_ID_KEY, -1);
         mRecipeId = getIntent().getIntExtra(DetailActivity.RECIPE_ID_KEY, -1);
 
+        // register previous/next nav buttons only if in portrait mode
         if (!isLandscape()) {
-            findViewById(R.id.previous_step_button).setOnClickListener(new PreviousStepClickListener(getSupportFragmentManager(), getIntent()));
-            findViewById(R.id.next_step_button).setOnClickListener(new NextStepClickListener(getSupportFragmentManager(), getIntent()));
+            registerNavigationButton(R.id.previous_step_button);
+            registerNavigationButton(R.id.next_step_button);
         }
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, StepDetailFragment.getInstance(mRecipeId, mStepId))
                 .commit();
+    }
+
+    private void registerNavigationButton(int buttonResId) {
+        findViewById(buttonResId).setOnClickListener(BaseStepNavigationClickListener
+                .getInstance(buttonResId, getSupportFragmentManager(), getIntent()));
     }
 
     private boolean isLandscape() {

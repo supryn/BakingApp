@@ -37,7 +37,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:visibility="invisible"/>
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/horizontalHalf"
             android:layout_width="wrap_content"
@@ -60,6 +59,5 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/horizontalHalf"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
