@@ -2,7 +2,6 @@ package com.udacity.android.bakingapp;
 
 import android.content.Intent;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
@@ -14,9 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem;
-import static androidx.test.espresso.contrib.RecyclerViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -24,30 +22,48 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class DetailActivityTest {
 
+    private static final int RECIPE_ID = 1;
+    private static final int STEP_LIST_SIZE = 7;
+
     @Rule
-    public ActivityTestRule<DetailActivity> mActivityTestRule = new ActivityTestRule<>(DetailActivity.class, false, false);
+    public ActivityTestRule<DetailActivity> mTestRule = new ActivityTestRule<>(DetailActivity.class, false, false);
 
     @Before
     public void setupActivity() {
-        // setup intent for first recipe
         Intent intent = new Intent();
-        intent.putExtra(DetailActivity.RECIPE_ID_KEY, 1);
-        intent.putExtra(DetailActivity.STEP_LIST_SIZE_KEY, 7);
-        mActivityTestRule.launchActivity(intent);
-//        mActivityTestRule.getActivity().getResources().getString(R.)
+        intent.putExtra(DetailActivity.RECIPE_ID_KEY, RECIPE_ID);
+        intent.putExtra(DetailActivity.STEP_LIST_SIZE_KEY, STEP_LIST_SIZE);
+        mTestRule.launchActivity(intent);
     }
 
     @Test
     public void test_ClickStepsButton_DisplaysStepListFragment() {
-        // check detail activity launched
-        onView(withId(R.id.steps_button)).check(matches(withText("Steps")));
-        // check step list fragment is displayed
-        onView(withId(R.id.recipes_list)).check(matches(hasDescendant(withText("GO"))));
+        onView(withId(R.id.steps_button)).check(
+                matches(withText(getStringResource(R.string.ui_steps_button_label))));
+        onView(withId(R.id.recipes_list)).check(
+                matches(
+                        hasDescendant(
+                                withText(getStringResource(R.string.ui_step_button_label))
+                        )
+                )
+        );
     }
 
     @Test
     public void test_ClickIngredientsButton_DisplaysIngredientListFragment() {
-
+        onView(withId(R.id.ingredients_button)).check(
+                matches(withText(getStringResource(R.string.ui_ingredients_button_label))));
+        onView(withId(R.id.ingredients_button)).perform(click());
+        onView(withId(R.id.recipes_list)).check(
+                matches(
+                        hasDescendant(
+                                withText(getStringResource(R.string.ui_ingredient_measure_label))
+                        )
+                )
+        );
     }
 
+    private String getStringResource(int resId) {
+        return mTestRule.getActivity().getResources().getString(resId);
+    }
 }

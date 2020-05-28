@@ -28,7 +28,7 @@ import com.udacity.android.bakingapp.ui.detail.DetailActivity;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModel;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModelFactory;
 import com.udacity.android.bakingapp.ui.detail.StepDetailActivity;
-import com.udacity.android.bakingapp.utility.ViewModelInjectUtil;
+import com.udacity.android.bakingapp.utility.ObjectProviderUtil;
 
 /**
  * Fragment displaying detailed Step information.
@@ -61,7 +61,7 @@ public class StepDetailFragment extends Fragment {
 
         StepDetailFragmentBinding binding = StepDetailFragmentBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(this);
-        DetailActivityViewModelFactory factory = ViewModelInjectUtil.provideDetailActivityViewModelFactory(binding.getRoot().getContext(), mRecipeId);
+        DetailActivityViewModelFactory factory = ObjectProviderUtil.provideDetailActivityViewModelFactory(binding.getRoot().getContext(), mRecipeId);
         DetailActivityViewModel viewModel = new ViewModelProvider(this, factory).get(DetailActivityViewModel.class);
         viewModel.getRecipe().observe(this, recipe -> {
             Step step = getSpecificStep(recipe);

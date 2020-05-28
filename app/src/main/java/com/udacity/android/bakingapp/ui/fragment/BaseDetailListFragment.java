@@ -14,7 +14,7 @@ import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
 import com.udacity.android.bakingapp.ui.adapter.BaseListTypeAdapter;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModel;
 import com.udacity.android.bakingapp.ui.detail.DetailActivityViewModelFactory;
-import com.udacity.android.bakingapp.utility.ViewModelInjectUtil;
+import com.udacity.android.bakingapp.utility.ObjectProviderUtil;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends B
 
     @Override
     void observeData(View view, BaseListTypeAdapter adapter, int recipeId) {
-        DetailActivityViewModelFactory factory = ViewModelInjectUtil
+        DetailActivityViewModelFactory factory = ObjectProviderUtil
                 .provideDetailActivityViewModelFactory(view.getContext(), recipeId);
         DetailActivityViewModel viewModel = new ViewModelProvider(this, factory)
                 .get(DetailActivityViewModel.class);

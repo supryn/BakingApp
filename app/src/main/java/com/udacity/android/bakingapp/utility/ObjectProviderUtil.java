@@ -13,23 +13,23 @@ import com.udacity.android.bakingapp.ui.main.MainActivityViewModelFactory;
  *  Utility class providing view models to their respective activities/fragments.
  *
  */
-public final class ViewModelInjectUtil {
+public final class ObjectProviderUtil {
 
     public static DetailActivityViewModelFactory provideDetailActivityViewModelFactory(Context context, int recipeId) {
-        return new DetailActivityViewModelFactory(getRepository(context), recipeId);
+        return new DetailActivityViewModelFactory(provideRepository(context), recipeId);
     }
 
     public static MainActivityViewModelFactory provideMainActivityViewModelFactory(Context context) {
-        return new MainActivityViewModelFactory(getRepository(context));
+        return new MainActivityViewModelFactory(provideRepository(context));
     }
 
     // this would be used when needing to instantiate the appropriate objects for running a deferred task with something like WorkManager.
     public static BakingDataSource provideBakingDataSource(Context context) {
-        getRepository(context);
+        provideRepository(context);
         return BakingDataSource.getInstance(context);
     }
 
-    private static BakingRepository getRepository(Context context) {
+    public static BakingRepository provideRepository(Context context) {
         return BakingRepository.getInstance(
                 BakingDatabase.getInstance(context).bakingDao(),
                 BakingDataSource.getInstance(context),

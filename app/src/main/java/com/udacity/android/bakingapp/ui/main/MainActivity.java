@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.udacity.android.bakingapp.R;
+import com.udacity.android.bakingapp.ui.BakingWidgetProvider;
 
 public class MainActivity extends AppCompatActivity {
 
