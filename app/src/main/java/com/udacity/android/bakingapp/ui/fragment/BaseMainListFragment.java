@@ -1,8 +1,6 @@
 package com.udacity.android.bakingapp.ui.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -40,7 +38,10 @@ public abstract class BaseMainListFragment extends BaseListFragment implements B
         intent.putExtra(RECIPE_ID_KEY, recipeType.getId());
         intent.putExtra(STEP_LIST_SIZE_KEY, ((Recipe) recipeType).steps.size());
         startActivity(intent);
-        BakingWidgetProvider.sendRefreshBroadcast(getContext(), recipeType.getId());
+        BakingWidgetProvider.sendRefreshBroadcast(
+                getContext(),
+                recipeType.getId(),
+                ((Recipe) recipeType).name);
     }
 
     @Override

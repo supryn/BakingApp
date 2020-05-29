@@ -63,7 +63,7 @@ public class StepDetailFragment extends Fragment {
         binding.setLifecycleOwner(this);
         DetailActivityViewModelFactory factory = ObjectProviderUtil.provideDetailActivityViewModelFactory(binding.getRoot().getContext(), mRecipeId);
         DetailActivityViewModel viewModel = new ViewModelProvider(this, factory).get(DetailActivityViewModel.class);
-        viewModel.getRecipe().observe(this, recipe -> {
+        viewModel.getRecipe().observe(getViewLifecycleOwner(), recipe -> {
             Step step = getSpecificStep(recipe);
             binding.setStep(step);
             parseMedia(binding, step);

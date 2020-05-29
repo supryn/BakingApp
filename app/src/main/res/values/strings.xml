@@ -21,6 +21,7 @@
     <string name="ui_step_button_label">GO</string>
     <string name="ui_ingredient_measure_label">Measure:</string>
     <string name="ui_ingredient_quantity_label">Quantity:</string>
+    <string name="ui_widget_recipe_label">Recipe: </string>
 
     <!-- JSON String Resources -->
     <string name="json_recipe_id">id</string>

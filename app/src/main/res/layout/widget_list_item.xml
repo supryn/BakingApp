@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recipe_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        tools:text="Some text"
-        android:textStyle="bold"
-        android:textSize="12sp" />
+    <TextView
+        android:id="@+id/widget_step_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_step_label"
+        android:textSize="@dimen/text_size_large"
+        />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/widget_step_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        tools:text="1"
+        android:textSize="@dimen/text_size_large" />
+
+    <Button
+        android:id="@+id/widget_step_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:text="@string/ui_step_button_label"
+        android:textColor="@android:color/holo_blue_light" />
+
+</LinearLayout>
