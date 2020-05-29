@@ -13,7 +13,6 @@ import com.udacity.android.bakingapp.utility.ObjectProviderUtil;
 
 import java.util.List;
 
-import static com.udacity.android.bakingapp.ui.detail.DetailActivity.RECIPE_ID_KEY;
 
 public class BakingWidgetService extends RemoteViewsService {
     @Override
@@ -37,8 +36,6 @@ public class BakingWidgetService extends RemoteViewsService {
         public void onCreate() {
             mRepository = ObjectProviderUtil.provideRepository(mContext);
         }
-
-
 
         @Override
         public int getCount() {
@@ -81,8 +78,8 @@ public class BakingWidgetService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-            int recipeId = PreferenceManager.getDefaultSharedPreferences(mContext).getInt(RECIPE_ID_KEY, 1);
-            mRepository.getRecipeById(recipeId).observeForever(recipe -> mIngredients = recipe.ingredients);
+            int recipeId = PreferenceManager.getDefaultSharedPreferences(mContext).getInt(BakingWidgetProvider.RECIPE_ID_KEY, 1);
+            mIngredients = mRepository.getRecipeByIdSynchronously(recipeId).ingredients;
         }
     }
 }

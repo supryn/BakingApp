@@ -5,24 +5,21 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import com.udacity.android.bakingapp.R;
-
-import static com.udacity.android.bakingapp.ui.detail.DetailActivity.RECIPE_ID_KEY;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class BakingWidgetProvider extends AppWidgetProvider {
 
-    private static final String RECIPE_ID_KEY = "RECIPE_ID_KEY";
+    static final String RECIPE_ID_KEY = "RECIPE_ID_KEY";
 
     public static void sendRefreshBroadcast(Context context, int recipeId) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(RECIPE_ID_KEY, recipeId);
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit().putInt(RECIPE_ID_KEY, recipeId).commit();
         Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.setComponent(new ComponentName(context, BakingWidgetProvider.class));
         context.sendBroadcast(intent);
@@ -50,10 +47,8 @@ public class BakingWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         Intent intent = new Intent(context, BakingWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_widget);
-        views.setRemoteAdapter(appWidgetId, intent);
+        views.setRemoteAdapter(R.id.list_view, intent);
         views.setEmptyView(R.id.list_view, R.id.empty_view);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

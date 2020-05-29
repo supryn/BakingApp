@@ -67,6 +67,9 @@ public final class BakingRepository {
         return mDao.getRecipeById(recipeId);
     }
 
+    public Recipe getRecipeByIdSynchronously(int recipeId) {
+        return mDao.getRecipeByIdSync(recipeId);
+    }
 
     private void checkCache() {
         mExecutors.getDiskExecutor().execute(() -> {

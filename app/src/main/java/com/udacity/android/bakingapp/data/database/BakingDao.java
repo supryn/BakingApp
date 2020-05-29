@@ -35,6 +35,14 @@ public interface BakingDao {
     @Query("SELECT * FROM recipe_table WHERE recipe_id = :recipeId")
     LiveData<Recipe> getRecipeById(int recipeId);
 
+    /**
+     * Gets a specific recipe by its id synchronously.
+     * @param recipeId recipeId.
+     * @return list of recipes.
+     */
+    @Query("SELECT * FROM recipe_table WHERE recipe_id = :recipeId")
+    Recipe getRecipeByIdSync(int recipeId);
+
 
 
     /**
