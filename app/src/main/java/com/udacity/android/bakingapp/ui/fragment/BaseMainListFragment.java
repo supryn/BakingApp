@@ -2,9 +2,13 @@ package com.udacity.android.bakingapp.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ProgressBar;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.Recipe;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import com.udacity.android.bakingapp.ui.BakingWidgetProvider;
@@ -14,6 +18,8 @@ import com.udacity.android.bakingapp.ui.detail.DetailActivity;
 import com.udacity.android.bakingapp.ui.main.MainActivityViewModel;
 import com.udacity.android.bakingapp.ui.main.MainActivityViewModelFactory;
 import com.udacity.android.bakingapp.utility.ObjectProviderUtil;
+
+import java.util.List;
 
 import static com.udacity.android.bakingapp.ui.detail.DetailActivity.RECIPE_ID_KEY;
 import static com.udacity.android.bakingapp.ui.detail.DetailActivity.STEP_LIST_SIZE_KEY;
@@ -29,7 +35,15 @@ public abstract class BaseMainListFragment extends BaseListFragment implements B
         MainActivityViewModelFactory factory = ObjectProviderUtil
                 .provideMainActivityViewModelFactory(view.getContext());
         MainActivityViewModel mViewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
-        mViewModel.getRecipes().observe(this, adapter::swapData);
+        mViewModel.getRecipes().observe(this, new Observer<List<Recipe>>() {
+            @Override
+            public void onChanged(List<Recipe> recipes) {
+                if (recipes != null && recipes.size() != 0) {
+                    hideProgressBar(view);
+                    adapter.swapData(recipes);
+                }
+            }
+        });
     }
 
     @Override

@@ -26,15 +26,16 @@
 
         <TextView
             android:id="@+id/ingredient_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{ingredient.item}"
             android:layout_marginLeft="@dimen/margin_medium"
-            tools:text="Vanilla pudding"
+            android:text="@{ingredient.item}"
             android:textSize="@dimen/text_size_medium"
-            app:layout_constraintTop_toBottomOf="@id/ingredient_name_label"
-            app:layout_constraintBottom_toTopOf="@id/ingredient_name_label"
-            app:layout_constraintLeft_toRightOf="@id/ingredient_name_label"/>
+            app:layout_constraintLeft_toRightOf="@id/ingredient_name_label"
+            app:layout_constraintTop_toTopOf="@id/ingredient_name_label"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="30dp"
+            tools:text="Vanilla pudding" />
 
         <TextView
             android:id="@+id/ingredient_measure_label"
@@ -44,18 +45,18 @@
             tools:text="Measure:"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintLeft_toLeftOf="@id/ingredient_name_label"
-            app:layout_constraintTop_toBottomOf="@id/ingredient_name_label"/>
+            app:layout_constraintTop_toTopOf="@id/ingredient_measure"/>
 
         <TextView
             android:id="@+id/ingredient_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{ingredient.measure}"
-            tools:text="CUP"
             android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/ingredient_measure_label"
             app:layout_constraintLeft_toLeftOf="@id/ingredient_name"
-            app:layout_constraintTop_toBottomOf="@id/ingredient_measure_label"
-            app:layout_constraintBottom_toTopOf="@id/ingredient_measure_label"/>
+            app:layout_constraintTop_toBottomOf="@+id/ingredient_name"
+            tools:text="CUP" />
 
         <TextView
             android:id="@+id/ingredient_quantity_label"

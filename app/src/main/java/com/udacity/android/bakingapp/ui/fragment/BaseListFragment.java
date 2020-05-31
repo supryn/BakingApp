@@ -42,14 +42,9 @@ public abstract class BaseListFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
     }
 
-    abstract RecyclerView.LayoutManager getLayoutManager(View view);
-
-    abstract void observeData(View view, BaseListTypeAdapter adapter, int recipeId);
-
-    abstract int getAdapterResId();
-
-    // the reason for this abstraction is to show clear definition that a IngredientListFragment is not clickable,
-    abstract BakingClickListener getClickListener();
+    void hideProgressBar(View view) {
+        view.findViewById(R.id.baking_progress_bar).setVisibility(View.GONE);
+    }
 
     private int getRecipeId(Bundle bundle) {
         if (bundle != null) {
@@ -58,4 +53,11 @@ public abstract class BaseListFragment extends Fragment {
         return mRecipeId;
     }
 
+    abstract RecyclerView.LayoutManager getLayoutManager(View view);
+
+    abstract void observeData(View view, BaseListTypeAdapter adapter, int recipeId);
+
+    abstract int getAdapterResId();
+
+    abstract BakingClickListener getClickListener();
 }

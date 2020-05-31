@@ -1,6 +1,8 @@
 package com.udacity.android.bakingapp.ui.adapter;
 
-import android.widget.Button;
+
+
+import android.widget.ImageButton;
 
 import androidx.databinding.ViewDataBinding;
 
@@ -28,7 +30,7 @@ public class StepListTypeAdapter extends BaseListTypeAdapter<Step> {
     class StepListTypeViewHolder extends BaseListTypeViewHolder {
 
         private StepListItemBinding mBinding;
-        private Button mStepButton;
+        private ImageButton mStepButton;
 
         StepListTypeViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());

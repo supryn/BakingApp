@@ -72,10 +72,12 @@ public final class BakingRepository {
     }
 
     private void checkCache() {
-        mExecutors.getDiskExecutor().execute(() -> {
-            if (mDao.getRecipeCount() == 0) {
-                mDataSource.fetchRecipeData();
-            }
-        });
+//        mExecutors.getDiskExecutor().execute(() -> {
+//            if (mDao.getRecipeCount() == 0) {
+//                mDataSource.fetchRecipeData();
+//            }
+//        });
+
+        mDataSource.fetchRecipeData();
     }
 }

@@ -8,7 +8,7 @@
         android:id="@+id/widget_step_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
         android:text="@string/ui_step_label"
         android:textSize="@dimen/text_size_medium"
         android:layout_alignParentLeft="true" />
@@ -17,45 +17,18 @@
         android:id="@+id/widget_step_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
         tools:text="1"
         android:textSize="@dimen/text_size_medium"
         android:layout_toRightOf="@id/widget_step_label" />
 
-    <Button
+    <ImageButton
         android:id="@+id/widget_step_button"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="0dp"
-        android:text="@string/ui_step_button_label"
-        android:textColor="@android:color/holo_blue_light"
+        android:src="@drawable/arrow_forward_12dp"
         android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>
-
-<!-- <TextView
-        android:id="@+id/widget_step_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ui_step_label"
-        android:textSize="@dimen/text_size_medium"
-        />
-
-    <TextView
-        android:id="@+id/widget_step_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
-        tools:text="1"
-        android:textSize="@dimen/text_size_medium" />
-
-    <Button
-        android:id="@+id/widget_step_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:minHeight="0dp"
-        android:text="@string/ui_step_button_label"
-        android:textColor="@android:color/holo_blue_light" /> -->

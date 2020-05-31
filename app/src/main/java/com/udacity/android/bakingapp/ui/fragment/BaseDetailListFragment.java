@@ -55,7 +55,11 @@ public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends B
         DetailActivityViewModel viewModel = new ViewModelProvider(this, factory)
                 .get(DetailActivityViewModel.class);
         viewModel.getRecipe().observe(this, recipe -> {
-            adapter.swapData(getItemList(recipe));
+            if (recipe != null) {
+                hideProgressBar(view);
+                adapter.swapData(getItemList(recipe));
+            }
+
         });
     }
 
