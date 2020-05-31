@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ui_step_label"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="@dimen/text_size_medium"
         />
 
     <TextView
@@ -19,13 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_medium"
         tools:text="1"
-        android:textSize="@dimen/text_size_large" />
+        android:textSize="@dimen/text_size_medium" />
 
     <Button
         android:id="@+id/widget_step_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_medium"
+        android:minHeight="0dp"
         android:text="@string/ui_step_button_label"
         android:textColor="@android:color/holo_blue_light" />
 

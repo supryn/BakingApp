@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Recipe: Nutella Pie"
-        android:textSize="@dimen/text_size_large"/>
+        android:textSize="@dimen/text_size_medium"/>
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/widget_list_view"
         android:layout_width="match_parent"
@@ -24,6 +24,6 @@
         android:background="@drawable/widget_item_background"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:text="@string/empty_view_text"
-        android:textSize="20sp" />
+        android:text="@string/initial_startup_widget_msg"
+        android:textSize="@dimen/text_size_medium" />
 </LinearLayout>

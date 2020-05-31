@@ -56,6 +56,7 @@ public class BakingWidgetService extends RemoteViewsService {
             Bundle bundle = new Bundle();
             bundle.putInt(StepDetailActivity.STEP_ID_KEY, stepId);
             bundle.putInt(DetailActivity.RECIPE_ID_KEY, mSteps.get(position).recipeId);
+            bundle.putInt(DetailActivity.STEP_LIST_SIZE_KEY, mSteps.size());
             Intent fillInIntent = new Intent();
             fillInIntent.putExtras(bundle);
             remoteViews.setOnClickFillInIntent(R.id.widget_step_button, fillInIntent);
