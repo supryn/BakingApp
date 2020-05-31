@@ -72,8 +72,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
     private static RemoteViews buildDefaultWidget(Context context) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.baking_widget);
         String recipeName = PreferenceManager.getDefaultSharedPreferences(context).getString(RECIPE_NAME_KEY, null);
-        String moddedRecipeName = context.getString(R.string.ui_widget_recipe_label) + recipeName;
-        remoteViews.setTextViewText(R.id.widget_recipe_name, moddedRecipeName);
+        remoteViews.setTextViewText(R.id.widget_recipe_name, recipeName);
         remoteViews.setEmptyView(R.id.widget_list_view, R.id.empty_view);
 
         return remoteViews;

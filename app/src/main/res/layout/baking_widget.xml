@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
-    <TextView
-        android:id="@+id/widget_recipe_name"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Recipe: Nutella Pie"
-        android:textSize="@dimen/text_size_medium"/>
+        android:background="@android:color/holo_orange_dark"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/widget_recipe_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:text="@string/ui_widget_recipe_label"
+            android:textSize="@dimen/text_size_small_medium"/>
+        <TextView
+            android:id="@+id/widget_recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:textColor="@android:color/white"
+            tools:text="Nutella Pie"
+            android:textSize="@dimen/text_size_medium_large"/>
+    </LinearLayout>
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/widget_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
         android:gravity="center"
         android:loopViews="true" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"

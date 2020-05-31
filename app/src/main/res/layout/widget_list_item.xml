@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
+        android:id="@+id/widget_step_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/ui_step_label"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/widget_step_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        tools:text="1"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_toRightOf="@id/widget_step_label" />
+
+    <Button
+        android:id="@+id/widget_step_button"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:text="@string/ui_step_button_label"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_alignParentRight="true" />
+
+
+</RelativeLayout>
+
+<!-- <TextView
         android:id="@+id/widget_step_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +58,4 @@
         android:layout_marginLeft="@dimen/margin_medium"
         android:minHeight="0dp"
         android:text="@string/ui_step_button_label"
-        android:textColor="@android:color/holo_blue_light" />
-
-</LinearLayout>
+        android:textColor="@android:color/holo_blue_light" /> -->
