@@ -22,22 +22,24 @@ abstract class BaseStepNavigationClickListener implements View.OnClickListener {
     private static int mMaxStepsSize;
     private static int mCurrentStep;
     private FragmentManager mFragmentManager;
+    private NavigationClickListener mNavigationClickListener;
     private Intent mIntent;
 
-    BaseStepNavigationClickListener(FragmentManager fragmentManager, Intent intent) {
+    BaseStepNavigationClickListener(FragmentManager fragmentManager, Intent intent, NavigationClickListener navigationClickListener) {
         mFragmentManager = fragmentManager;
         mIntent = intent;
+        mNavigationClickListener = navigationClickListener;
         mCurrentStep = intent.getIntExtra(StepDetailActivity.STEP_ID_KEY, -1);
         mMaxStepsSize = intent.getIntExtra(DetailActivity.STEP_LIST_SIZE_KEY, -1);
         mRecipeId = intent.getIntExtra(DetailActivity.RECIPE_ID_KEY, -1);
     }
 
-    static BaseStepNavigationClickListener getInstance(int buttonResId, FragmentManager fragmentManager, Intent intent) {
+    static BaseStepNavigationClickListener getInstance(int buttonResId, FragmentManager fragmentManager, Intent intent, NavigationClickListener navigationClickListener) {
         switch (buttonResId) {
             case R.id.previous_step_button:
-                return new PreviousStepClickListener(fragmentManager, intent);
+                return new PreviousStepClickListener(fragmentManager, intent, navigationClickListener);
             case R.id.next_step_button:
-                return new NextStepClickListener(fragmentManager, intent);
+                return new NextStepClickListener(fragmentManager, intent, navigationClickListener);
             default:
                 throw new RuntimeException(BUTTON_NOT_FOUND);
         }
@@ -48,6 +50,7 @@ abstract class BaseStepNavigationClickListener implements View.OnClickListener {
         determineStep();
         switchFragment(getCurrentStep());
         mIntent.putExtra(StepDetailActivity.STEP_ID_KEY, getCurrentStep());
+        mNavigationClickListener.onClick(getCurrentStep());
     }
 
     abstract void determineStep();
@@ -68,5 +71,9 @@ abstract class BaseStepNavigationClickListener implements View.OnClickListener {
         mFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, StepDetailFragment.getInstance(mRecipeId, stepId))
                 .commit();
+    }
+
+    interface NavigationClickListener {
+        void onClick(int currentStep);
     }
 }

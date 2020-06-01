@@ -38,9 +38,6 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         int fragmentId = getIntent().getIntExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment);
         int stepId = getIntent().getIntExtra(StepDetailActivity.STEP_ID_KEY, 1);
 
-        registerButton(R.id.ingredients_button, R.string.app_ingredient_fragment);
-        registerButton(R.id.steps_button, R.string.app_step_fragment);
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, BaseDetailListFragment.getInstance(this, fragmentId, mRecipeId))
                 .commit();
@@ -49,9 +46,14 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.step_detail_fragment_container, StepDetailFragment.getInstance(mRecipeId, stepId))
                     .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.ingredients_fragment_container, BaseDetailListFragment.getInstance(this, R.string.app_ingredient_fragment, mRecipeId))
+                    .commit();
+        } else {
+            registerButton(R.id.ingredients_button, R.string.app_ingredient_fragment);
+            registerButton(R.id.steps_button, R.string.app_step_fragment);
         }
     }
-
 
     private void registerButton(int resId, int fragmentId) {
         Button button = findViewById(resId);

@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager;
 public class NextStepClickListener extends BaseStepNavigationClickListener {
 
 
-    NextStepClickListener(FragmentManager fragmentManager, Intent intent) {
-        super(fragmentManager, intent);
+    NextStepClickListener(FragmentManager fragmentManager, Intent intent, NavigationClickListener navigationClickListener) {
+        super(fragmentManager, intent, navigationClickListener);
     }
 
     @Override
