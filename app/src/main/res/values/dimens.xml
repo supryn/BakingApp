@@ -5,6 +5,7 @@
     <dimen name="text_size_small_medium">12sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_medium_large">18sp</dimen>
+    <dimen name="text_size_xmedium_large">20sp</dimen>
     <dimen name="text_size_large">24sp</dimen>
     <dimen name="text_size_xlarge">30sp</dimen>
 
@@ -13,6 +14,7 @@
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>
     <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xxlarge">75dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

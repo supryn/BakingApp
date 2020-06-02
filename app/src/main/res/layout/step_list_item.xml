@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ui_step_label"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="@dimen/text_size_xmedium_large"
             app:layout_constraintTop_toBottomOf="@id/step_button"
             app:layout_constraintBottom_toTopOf="@id/step_button"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -30,7 +30,7 @@
             android:layout_marginLeft="@dimen/margin_medium"
             android:text="@{Integer.toString(step.id)}"
             tools:text="1"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="@dimen/text_size_xmedium_large"
             app:layout_constraintTop_toBottomOf="@id/step_label"
             app:layout_constraintBottom_toTopOf="@id/step_label"
             app:layout_constraintLeft_toRightOf="@id/step_label"/>
@@ -42,7 +42,7 @@
             android:layout_marginLeft="@dimen/margin_medium"
             android:text="@{step.shortDescription}"
             tools:text="This is a short description of the current step."
-            android:textSize="14sp"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintTop_toBottomOf="@id/step_label"
             app:layout_constraintBottom_toTopOf="@id/step_label"
             app:layout_constraintLeft_toRightOf="@id/step_number"

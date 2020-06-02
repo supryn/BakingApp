@@ -3,5 +3,6 @@
 
     <bool name="isTablet">false</bool>
     <bool name="isLandscape">false</bool>
+    <bool name="isTabletLandscape">false</bool>
 
 </resources>

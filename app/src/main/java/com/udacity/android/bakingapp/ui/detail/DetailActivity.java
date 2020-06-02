@@ -19,40 +19,79 @@ import com.udacity.android.bakingapp.ui.fragment.StepDetailFragment;
  */
 public class DetailActivity extends AppCompatActivity implements BakingClickListener {
 
-    public static final String LOG_TAG = DetailActivity.class.getSimpleName();
-
     public static final String RECIPE_ID_KEY = "recipe_id";
     public static final String STEP_LIST_SIZE_KEY = "step_list_size_id";
     private static final String FRAGMENT_ID_KEY = "fragment_id";
-    private int mRecipeId;
-    private int mRecipeStepsSize;
-    private boolean mIsTablet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-        mRecipeId = getIntent().getIntExtra(RECIPE_ID_KEY, -1);
-        mRecipeStepsSize = getIntent().getIntExtra(STEP_LIST_SIZE_KEY, -1);
-        mIsTablet = getResources().getBoolean(R.bool.isTablet);
-        int fragmentId = getIntent().getIntExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment);
-        int stepId = getIntent().getIntExtra(StepDetailActivity.STEP_ID_KEY, 1);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, BaseDetailListFragment.getInstance(this, fragmentId, mRecipeId))
-                .commit();
+        addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
 
-        if (mIsTablet) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.step_detail_fragment_container, StepDetailFragment.getInstance(mRecipeId, stepId))
-                    .commit();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.ingredients_fragment_container, BaseDetailListFragment.getInstance(this, R.string.app_ingredient_fragment, mRecipeId))
-                    .commit();
-        } else {
-            registerButton(R.id.ingredients_button, R.string.app_ingredient_fragment);
-            registerButton(R.id.steps_button, R.string.app_step_fragment);
+        // its a Tablet in landscape mode
+        if (getResource(R.bool.isTablet) && getResource(R.bool.isTabletLandscape)) {
+            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
+            registerButtons();
         }
+        // its a Tablet in portrait mode
+        else if (getResource(R.bool.isTablet)) {
+            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
+            addIngredientListFragmentContainer();
+        }
+        // its a Phone in either portrait or landscape mode
+        else {
+            registerButtons();
+        }
+    }
+
+    @Override
+    public void onClick(RecipeUmbrella recipeType) {
+        if (getResource(R.bool.isTablet)) {
+            addStepDetailFragmentContainer(recipeType.getId());
+            getIntent().putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
+        } else {
+            Intent intent = new Intent(getApplicationContext(), StepDetailActivity.class);
+            intent.putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
+            intent.putExtra(DetailActivity.RECIPE_ID_KEY, getIntentExtra(RECIPE_ID_KEY, -1));
+            intent.putExtra(DetailActivity.STEP_LIST_SIZE_KEY, getIntentExtra(STEP_LIST_SIZE_KEY, -1));
+            startActivity(intent);
+        }
+    }
+
+    private void addStepListFragmentContainer(int resId) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,
+                        BaseDetailListFragment.getInstance(
+                                this,
+                                resId,
+                                getIntentExtra(RECIPE_ID_KEY, -1)))
+                .commit();
+    }
+
+    private void addIngredientListFragmentContainer() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.ingredients_fragment_container,
+                        BaseDetailListFragment.getInstance(
+                                this,
+                                R.string.app_ingredient_fragment,
+                                getIntentExtra(RECIPE_ID_KEY, -1)))
+                .commit();
+    }
+
+    private void addStepDetailFragmentContainer(int stepId) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.step_detail_fragment_container,
+                        StepDetailFragment.getInstance(
+                                getIntentExtra(RECIPE_ID_KEY, -1),
+                                stepId))
+                .commit();
+    }
+
+    private void registerButtons() {
+        registerButton(R.id.ingredients_button, R.string.app_ingredient_fragment);
+        registerButton(R.id.steps_button, R.string.app_step_fragment);
     }
 
     private void registerButton(int resId, int fragmentId) {
@@ -60,28 +99,17 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         button.setOnClickListener(new ButtonClickListener(fragmentId));
     }
 
-
-    private void switchFragment(int fragmentId) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, BaseDetailListFragment.getInstance(this, fragmentId, mRecipeId))
-                .commit();
-        getIntent().putExtra(FRAGMENT_ID_KEY, fragmentId);
+    private boolean getResource(int boolRes) {
+        return getResources().getBoolean(boolRes);
     }
 
-    @Override
-    public void onClick(RecipeUmbrella recipeType) {
-        if (mIsTablet) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.step_detail_fragment_container, StepDetailFragment.getInstance(mRecipeId, recipeType.getId()))
-                    .commit();
-            getIntent().putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
-        } else {
-            Intent intent = new Intent(getApplicationContext(), StepDetailActivity.class);
-            intent.putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
-            intent.putExtra(DetailActivity.RECIPE_ID_KEY, mRecipeId);
-            intent.putExtra(DetailActivity.STEP_LIST_SIZE_KEY, mRecipeStepsSize);
-            startActivity(intent);
-        }
+    private int getIntentExtra(String key, int defaultValue) {
+        return getIntent().getIntExtra(key, defaultValue);
+    }
+
+    private void switchFragment(int fragmentId) {
+        addStepListFragmentContainer(fragmentId);
+        getIntent().putExtra(FRAGMENT_ID_KEY, fragmentId);
     }
 
     class ButtonClickListener implements View.OnClickListener {
