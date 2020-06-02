@@ -6,7 +6,8 @@ import androidx.databinding.ViewDataBinding;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.android.bakingapp.R;
-import com.udacity.android.bakingapp.databinding.RecipeListItemPhoneBinding;
+
+import com.udacity.android.bakingapp.databinding.RecipeListItemBinding;
 import com.udacity.android.bakingapp.model.Recipe;
 
 /**
@@ -22,7 +23,7 @@ class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
 
     @Override
     int getLayoutResId() {
-        return R.layout.recipe_list_item_phone;
+        return R.layout.recipe_list_item;
     }
 
     @Override
@@ -32,14 +33,14 @@ class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
 
     class RecipeListTypeViewHolder extends BaseListTypeViewHolder {
 
-        private RecipeListItemPhoneBinding mBinding;
+        private RecipeListItemBinding mBinding;
         private ImageView mRecipeImage;
 
 
         RecipeListTypeViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             binding.getRoot().setOnClickListener(this);
-            mBinding = (RecipeListItemPhoneBinding) binding;
+            mBinding = (RecipeListItemBinding) binding;
             mRecipeImage = binding.getRoot().findViewById(R.id.recipe_image);
         }
 

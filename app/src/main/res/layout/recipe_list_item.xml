@@ -26,9 +26,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
-
-           <!-- //    app:imageUrl="@{recipe.image}"
-            //    app:error="@{@drawable/default_food_image}"-->
             <TextView
                 android:id="@+id/recipe_name"
                 android:layout_width="wrap_content"
@@ -37,6 +34,7 @@
                 tools:text="Recipe Name"
                 android:textSize="@dimen/text_size_large"
                 android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginLeft="@dimen/margin_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recipe_image" />
 
@@ -46,7 +44,6 @@
                 android:layout_height="wrap_content"
                 tools:text="Serving Size:"
                 android:text="@string/serving_size_label"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:textSize="@dimen/text_size_medium"
                 app:layout_constraintTop_toBottomOf="@id/recipe_name"
                 app:layout_constraintLeft_toLeftOf="@id/recipe_name" />
@@ -58,6 +55,7 @@
                 android:text="@{Integer.toString(recipe.servings)}"
                 tools:text="5"
                 android:textSize="@dimen/text_size_medium"
+                android:layout_marginLeft="@dimen/margin_small"
                 app:layout_constraintTop_toBottomOf="@id/serving_size_label"
                 app:layout_constraintBottom_toTopOf="@id/serving_size_label"
                 app:layout_constraintLeft_toRightOf="@id/serving_size_label"/>
