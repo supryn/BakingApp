@@ -30,7 +30,8 @@ public class BakingWidgetService extends RemoteViewsService {
         private static final int VIEW_TYPE_COUNT = 1;
 
         private Context mContext;
-        private List<Step> mSteps;
+//        private List<Step> mSteps;
+        private List<Ingredient> mIngredients;
         private BakingRepository mRepository;
 
         BakingRemoteViewsFactory(Context context) {
@@ -44,22 +45,27 @@ public class BakingWidgetService extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            return mSteps != null ? mSteps.size() : 0;
+//            return mSteps != null ? mSteps.size() : 0;
+            return mIngredients != null ? mIngredients.size() : 0;
         }
 
         @Override
         public RemoteViews getViewAt(int position) {
             RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
-            int stepId = mSteps.get(position).stepId;
-            remoteViews.setTextViewText(R.id.widget_step_number, Integer.toString(stepId));
 
-            Bundle bundle = new Bundle();
-            bundle.putInt(StepDetailActivity.STEP_ID_KEY, stepId);
-            bundle.putInt(DetailActivity.RECIPE_ID_KEY, mSteps.get(position).recipeId);
-            bundle.putInt(DetailActivity.STEP_LIST_SIZE_KEY, mSteps.size());
-            Intent fillInIntent = new Intent();
-            fillInIntent.putExtras(bundle);
-            remoteViews.setOnClickFillInIntent(R.id.widget_step_button, fillInIntent);
+//            int stepId = mSteps.get(position).stepId;
+//            remoteViews.setTextViewText(R.id.widget_step_number, Integer.toString(stepId));
+//            Bundle bundle = new Bundle();
+//            bundle.putInt(StepDetailActivity.STEP_ID_KEY, stepId);
+//            bundle.putInt(DetailActivity.RECIPE_ID_KEY, mSteps.get(position).recipeId);
+//            bundle.putInt(DetailActivity.STEP_LIST_SIZE_KEY, mSteps.size());
+//            Intent fillInIntent = new Intent();
+//            fillInIntent.putExtras(bundle);
+//            remoteViews.setOnClickFillInIntent(R.id.widget_step_button, fillInIntent);
+
+            remoteViews.setTextViewText(R.id.widget_ingredient_name, mIngredients.get(position).item);
+            remoteViews.setTextViewText(R.id.widget_ingredient_measure, mIngredients.get(position).measure);
+            remoteViews.setTextViewText(R.id.widget_ingredient_quantity, Integer.toString(mIngredients.get(position).quantity));
 
             return remoteViews;
         }
@@ -86,14 +92,16 @@ public class BakingWidgetService extends RemoteViewsService {
 
         @Override
         public void onDestroy() {
-            mSteps = null;
+//            mSteps = null;
+            mIngredients = null;
             mRepository = null;
         }
 
         @Override
         public void onDataSetChanged() {
             int recipeId = PreferenceManager.getDefaultSharedPreferences(mContext).getInt(BakingWidgetProvider.RECIPE_ID_KEY, 1);
-            mSteps = mRepository.getRecipeByIdSynchronously(recipeId).steps;
+//            mSteps = mRepository.getRecipeByIdSynchronously(recipeId).steps;
+            mIngredients = mRepository.getRecipeByIdSynchronously(recipeId).ingredients;
         }
     }
 }

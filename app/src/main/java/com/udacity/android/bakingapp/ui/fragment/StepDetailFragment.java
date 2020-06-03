@@ -2,6 +2,7 @@ package com.udacity.android.bakingapp.ui.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,13 @@ import com.udacity.android.bakingapp.utility.ObjectProviderUtil;
  */
 public class StepDetailFragment extends Fragment {
 
+
+    private static final String PLAYBACK_POSITION_KEY = "playback_position";
+
     private int mStepId;
     private int mRecipeId;
+    private boolean mPlayWhenReady = true;
+    private long mCurrentPlaybackPosition ;
     private static SimpleExoPlayer mExoPlayer;
 
 
@@ -52,13 +58,14 @@ public class StepDetailFragment extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (getArguments() != null) {
-            mStepId = getArguments().getInt(StepDetailActivity.STEP_ID_KEY);
-            mRecipeId = getArguments().getInt(DetailActivity.RECIPE_ID_KEY);
+        mStepId = getArguments().getInt(StepDetailActivity.STEP_ID_KEY);
+        mRecipeId = getArguments().getInt(DetailActivity.RECIPE_ID_KEY);
+
+        if (savedInstanceState != null) {
+            mCurrentPlaybackPosition = savedInstanceState.getLong(PLAYBACK_POSITION_KEY, mCurrentPlaybackPosition);
         }
 
         StepDetailFragmentBinding binding = StepDetailFragmentBinding.inflate(inflater, container, false);
@@ -75,20 +82,42 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mExoPlayer != null) {
-            mExoPlayer.stop();
-            mExoPlayer.release();
-            mExoPlayer = null;
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT >= 24) {
+            prepareMediaSource();
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ((Util.SDK_INT < 24 || mExoPlayer == null)) {
+            prepareMediaSource();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        releaseExoPlayer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mExoPlayer != null) {
+            releaseExoPlayer();
+        }
+    }
+
+
+
     private void parseMedia(StepDetailFragmentBinding binding, Step step) {
         if (!isEmpty(step.videoUrl)) {
-            initializeExoPlayer(binding, Uri.parse(step.videoUrl));
+            prepareMediaSource(binding, Uri.parse(step.videoUrl));
         } else if (!isEmpty(step.thumbnailUrl)) {
-            initializeExoPlayer(binding, Uri.parse(step.thumbnailUrl));
+            prepareMediaSource(binding, Uri.parse(step.thumbnailUrl));
         } else {
             // neither video nor thumbnail urls available. load default image.
             ImageView defaultImage = binding.getRoot().findViewById(R.id.default_media_image);
@@ -99,15 +128,33 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
-    private void initializeExoPlayer(StepDetailFragmentBinding binding, Uri videoUri) {
-        mExoPlayer = new SimpleExoPlayer.Builder(getContext()).build();
+    private void prepareMediaSource(StepDetailFragmentBinding binding, Uri videoUri) {
         PlayerView playerView = binding.getRoot().findViewById(R.id.player_view);
         playerView.setPlayer(mExoPlayer);
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
                 Util.getUserAgent(getContext(), getContext().getString(R.string.app_name)));
         MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(videoUri);
-        mExoPlayer.prepare(videoSource);
+        mExoPlayer.seekTo(mCurrentPlaybackPosition);
+        mExoPlayer.prepare(videoSource, false, false);
+    }
+
+    private void prepareMediaSource() {
+        mExoPlayer = new SimpleExoPlayer.Builder(getContext()).build();
+        mExoPlayer.setPlayWhenReady(mPlayWhenReady);
+    }
+
+    private void releaseExoPlayer() {
+        mPlayWhenReady = mExoPlayer.getPlayWhenReady();
+        mCurrentPlaybackPosition = mExoPlayer.getCurrentPosition();
+        mExoPlayer.release();
+        mExoPlayer = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(PLAYBACK_POSITION_KEY, mCurrentPlaybackPosition);
     }
 
     private Step getSpecificStep(Recipe recipe) {
