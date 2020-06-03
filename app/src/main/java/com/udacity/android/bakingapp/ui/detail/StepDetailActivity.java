@@ -1,9 +1,11 @@
 package com.udacity.android.bakingapp.ui.detail;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.ui.fragment.StepDetailFragment;
@@ -20,6 +22,7 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step_detail_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // register previous/next nav buttons only if in portrait mode
         if (!isLandscape()) {
             setCurrentStep(getIntentExtra(STEP_ID_KEY, -1));
@@ -44,6 +47,17 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
     private void registerNavigationButton(int buttonResId) {
         findViewById(buttonResId).setOnClickListener(BaseStepNavigationClickListener
                 .getInstance(buttonResId, getSupportFragmentManager(), getIntent(), this));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private boolean isLandscape() {

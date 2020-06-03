@@ -2,10 +2,12 @@ package com.udacity.android.bakingapp.ui.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
@@ -27,6 +29,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
 
@@ -110,6 +113,17 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     private void switchFragment(int fragmentId) {
         addStepListFragmentContainer(fragmentId);
         getIntent().putExtra(FRAGMENT_ID_KEY, fragmentId);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     class ButtonClickListener implements View.OnClickListener {

@@ -2,7 +2,6 @@ package com.udacity.android.bakingapp.ui.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,6 @@ public class StepDetailFragment extends Fragment {
         mRecipeId = getArguments().getInt(DetailActivity.RECIPE_ID_KEY);
         mCurrentPlaybackPosition = getArguments().getLong(PLAYBACK_POSITION_KEY);
 
-
         StepDetailFragmentBinding binding = StepDetailFragmentBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(this);
         DetailActivityViewModelFactory factory = ObjectProviderUtil.provideDetailActivityViewModelFactory(binding.getRoot().getContext(), mRecipeId);
@@ -108,8 +106,6 @@ public class StepDetailFragment extends Fragment {
             releaseExoPlayer();
         }
     }
-
-
 
     private void parseMedia(StepDetailFragmentBinding binding, Step step) {
         if (!isEmpty(step.videoUrl)) {
