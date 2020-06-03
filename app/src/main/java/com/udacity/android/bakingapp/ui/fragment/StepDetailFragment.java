@@ -43,7 +43,7 @@ public class StepDetailFragment extends Fragment {
     private int mStepId;
     private int mRecipeId;
     private boolean mPlayWhenReady = true;
-    private long mCurrentPlaybackPosition ;
+    private static long mCurrentPlaybackPosition;
     private static SimpleExoPlayer mExoPlayer;
 
 
@@ -52,21 +52,19 @@ public class StepDetailFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putInt(StepDetailActivity.STEP_ID_KEY, stepId);
         bundle.putInt(DetailActivity.RECIPE_ID_KEY, recipeId);
+        bundle.putLong(PLAYBACK_POSITION_KEY, mCurrentPlaybackPosition);
         fragment.setArguments(bundle);
 
         return fragment;
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mStepId = getArguments().getInt(StepDetailActivity.STEP_ID_KEY);
         mRecipeId = getArguments().getInt(DetailActivity.RECIPE_ID_KEY);
+        mCurrentPlaybackPosition = getArguments().getLong(PLAYBACK_POSITION_KEY);
 
-        if (savedInstanceState != null) {
-            mCurrentPlaybackPosition = savedInstanceState.getLong(PLAYBACK_POSITION_KEY, mCurrentPlaybackPosition);
-        }
 
         StepDetailFragmentBinding binding = StepDetailFragmentBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(this);
@@ -149,12 +147,6 @@ public class StepDetailFragment extends Fragment {
         mCurrentPlaybackPosition = mExoPlayer.getCurrentPosition();
         mExoPlayer.release();
         mExoPlayer = null;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putLong(PLAYBACK_POSITION_KEY, mCurrentPlaybackPosition);
     }
 
     private Step getSpecificStep(Recipe recipe) {
