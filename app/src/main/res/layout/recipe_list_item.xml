@@ -8,7 +8,7 @@
             type="com.udacity.android.bakingapp.model.Recipe" />
     </data>
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
         app:cardCornerRadius="6dp"
@@ -21,7 +21,8 @@
             <ImageView
                 android:id="@+id/recipe_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/margin_small"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
@@ -35,7 +36,7 @@
                 android:textSize="@dimen/text_size_large"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginLeft="@dimen/margin_medium"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/recipe_image"
                 app:layout_constraintTop_toBottomOf="@id/recipe_image" />
 
             <TextView

@@ -53,9 +53,9 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         Intent intent = new Intent(context, BakingWidgetService.class);
         remoteViews.setRemoteAdapter(R.id.widget_list_view, intent);
 
-//        Intent activityIntent = new Intent(context, StepDetailActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, 0);
-//        remoteViews.setPendingIntentTemplate(R.id.widget_list_view, pendingIntent);
+        Intent activityIntent = new Intent(context, StepDetailActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, 0);
+        remoteViews.setPendingIntentTemplate(R.id.widget_list_view, pendingIntent);
 
         appWidgetManager.updateAppWidget(getBakingWidgetProvider(context), remoteViews);
         super.onUpdate(context, appWidgetManager, appWidgetIds);

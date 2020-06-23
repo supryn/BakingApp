@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<TextView
+    <TextView
         android:id="@+id/widget_step_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,63 +29,5 @@
         android:layout_height="wrap_content"
         android:src="@drawable/arrow_forward_12dp"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:layout_alignParentRight="true" />-->
-
-    <TextView
-        android:id="@+id/ingredient_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ui_ingredient_label"
-        tools:text="Ingredient:"
-        android:textSize="@dimen/text_size_small_medium"
-         />
-
-    <TextView
-        android:id="@+id/widget_ingredient_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:textSize="@dimen/text_size_small_medium"
-        tools:layout_editor_absoluteY="30dp"
-        tools:text="Vanilla pudding"
-        android:layout_toRightOf="@id/ingredient_name_label"/>
-
-    <TextView
-        android:id="@+id/ingredient_measure_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ui_ingredient_measure_label"
-        tools:text="Measure:"
-        android:textSize="@dimen/text_size_small_medium"
-        android:layout_below="@id/ingredient_name_label"/>
-
-    <TextView
-        android:id="@+id/widget_ingredient_measure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_small_medium"
-        tools:text="CUP"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_below="@id/widget_ingredient_name"
-        android:layout_toRightOf="@id/ingredient_measure_label"/>
-
-    <TextView
-        android:id="@+id/ingredient_quantity_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ui_ingredient_quantity_label"
-        tools:text="Quantity:"
-        android:textSize="@dimen/text_size_small_medium"
-        android:layout_below="@id/ingredient_measure_label"/>
-
-    <TextView
-        android:id="@+id/widget_ingredient_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
-        tools:text="6"
-        android:textSize="@dimen/text_size_small_medium"
-        android:layout_below="@id/widget_ingredient_measure"
-        android:layout_toRightOf="@id/ingredient_quantity_label"/>
-
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
