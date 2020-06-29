@@ -5,8 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,10 +28,12 @@ public abstract class BaseListFragment extends Fragment {
 
     private int mRecipeId;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_fragment, viewGroup, false);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
         BaseListTypeAdapter adapter = ListTypeAdapterFactory.create(getAdapterResId(), getClickListener());
         setupRecyclerView(view, adapter);
         observeData(view, adapter, getRecipeId(getArguments()));

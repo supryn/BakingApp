@@ -8,36 +8,32 @@
             type="com.udacity.android.bakingapp.model.Recipe" />
     </data>
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp">
+        android:layout_margin="@dimen/margin_small"
+        app:cardCornerRadius="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/recipe_image"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="@dimen/margin_small"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/recipe_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                tools:text="Nutella Cream Pie"
                 android:text="@{recipe.name}"
-                tools:text="Recipe Name"
-                android:textSize="@dimen/text_size_large"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginLeft="@dimen/margin_medium"
-                app:layout_constraintLeft_toLeftOf="@id/recipe_image"
-                app:layout_constraintTop_toBottomOf="@id/recipe_image" />
+                app:layout_constraintLeft_toRightOf="@id/recipe_image"
+                app:layout_constraintTop_toTopOf="@id/recipe_image" />
 
             <TextView
                 android:id="@+id/serving_size_label"
@@ -45,7 +41,6 @@
                 android:layout_height="wrap_content"
                 tools:text="Serving Size:"
                 android:text="@string/serving_size_label"
-                android:textSize="@dimen/text_size_medium"
                 app:layout_constraintTop_toBottomOf="@id/recipe_name"
                 app:layout_constraintLeft_toLeftOf="@id/recipe_name" />
 
@@ -55,11 +50,11 @@
                 android:layout_height="wrap_content"
                 android:text="@{Integer.toString(recipe.servings)}"
                 tools:text="5"
-                android:textSize="@dimen/text_size_medium"
                 android:layout_marginLeft="@dimen/margin_small"
                 app:layout_constraintTop_toBottomOf="@id/serving_size_label"
                 app:layout_constraintBottom_toTopOf="@id/serving_size_label"
                 app:layout_constraintLeft_toRightOf="@id/serving_size_label"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
