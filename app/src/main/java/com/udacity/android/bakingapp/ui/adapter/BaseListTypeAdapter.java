@@ -15,7 +15,7 @@ import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import java.util.List;
 
 /**
- * Base Adapter for displaying Recipe (both in phone and tablet based configurations), and Step information.
+ * Base Adapter for displaying Recipe, Ingredient, and Step inforamtion.
  *
  * @param <T>
  */
