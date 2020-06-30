@@ -32,8 +32,7 @@ public abstract class BaseListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_fragment, viewGroup, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(view.findViewById(R.id.toolbar));
+        View view = inflater.inflate(getLayoutId(), viewGroup, false);
         BaseListTypeAdapter adapter = ListTypeAdapterFactory.create(getAdapterResId(), getClickListener());
         setupRecyclerView(view, adapter);
         observeData(view, adapter, getRecipeId(getArguments()));
@@ -65,4 +64,6 @@ public abstract class BaseListFragment extends Fragment {
     abstract int getAdapterResId();
 
     abstract BakingClickListener getClickListener();
+
+    abstract int getLayoutId();
 }

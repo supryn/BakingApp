@@ -69,4 +69,8 @@ public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends B
     }
 
     abstract List<T> getItemList(Recipe recipe);
+
+    int getLayoutId() {
+        return R.layout.list_fragment;
+    }
 }

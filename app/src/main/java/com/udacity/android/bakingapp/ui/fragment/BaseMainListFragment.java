@@ -62,4 +62,10 @@ public abstract class BaseMainListFragment extends BaseListFragment implements B
     BakingClickListener getClickListener() {
         return this;
     }
+
+    @Override
+    int getLayoutId() {
+        return R.layout.list_fragment;
+    }
+
 }

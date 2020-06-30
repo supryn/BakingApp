@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
 

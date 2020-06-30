@@ -33,4 +33,5 @@ public class RecipeListFragment extends BaseMainListFragment {
     int getAdapterResId() {
         return R.string.app_adapter_recipes;
     }
+
 }
