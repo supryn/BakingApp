@@ -8,12 +8,22 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
+import com.udacity.android.bakingapp.ui.adapter.DetailViewPager;
+import com.udacity.android.bakingapp.ui.adapter.ViewPagerAdapter;
 import com.udacity.android.bakingapp.ui.fragment.BaseDetailListFragment;
 import com.udacity.android.bakingapp.ui.fragment.StepDetailFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Activity displaying more detailed information about a particular Recipe.
@@ -25,28 +35,70 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     public static final String STEP_LIST_SIZE_KEY = "step_list_size_id";
     private static final String FRAGMENT_ID_KEY = "fragment_id";
 
+    private static ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
+        mViewPager = findViewById(R.id.tab_viewpager);
+        if (mViewPager != null) {
+            configureViewPager();
+            configureTabLayout();
+        }
 
-        // its a Tablet in landscape mode
-        if (getResource(R.bool.isTablet) && getResource(R.bool.isTabletLandscape)) {
-            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
-            registerButtons();
-        }
-        // its a Tablet in portrait mode
-        else if (getResource(R.bool.isTablet)) {
-            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
-            addIngredientListFragmentContainer();
-        }
-        // its a Phone in either portrait or landscape mode
-        else {
-            registerButtons();
-        }
+
+//        addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
+//
+//        // its a Tablet in landscape mode
+//        if (getResource(R.bool.isTablet) && getResource(R.bool.isTabletLandscape)) {
+//            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
+//            registerButtons();
+//        }
+//        // its a Tablet in portrait mode
+//        else if (getResource(R.bool.isTablet)) {
+//            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
+//            addIngredientListFragmentContainer();
+//        }
+//        // its a Phone in either portrait or landscape mode
+//        else {
+//            registerButtons();
+//        }
+    }
+
+    private void configureTabLayout() {
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
+    }
+
+    private void configureViewPager() {
+            DetailViewPager detailViewPager = new DetailViewPager(this);
+            // add Steps tab
+            detailViewPager.addFragment(this,
+                    getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment),
+                    getIntentExtra(RECIPE_ID_KEY, -1),
+                    getString(R.string.ui_steps_button_label));
+            // add Ingredients tab
+            detailViewPager.addFragment(this,
+                    R.string.app_ingredient_fragment,
+                    getIntentExtra(RECIPE_ID_KEY, -1),
+                    getString(R.string.ui_ingredients_button_label));
+            mViewPager.setAdapter(detailViewPager.getAdapter());
     }
 
     @Override
@@ -63,26 +115,6 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         }
     }
 
-    private void addStepListFragmentContainer(int resId) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container,
-                        BaseDetailListFragment.getInstance(
-                                this,
-                                resId,
-                                getIntentExtra(RECIPE_ID_KEY, -1)))
-                .commit();
-    }
-
-    private void addIngredientListFragmentContainer() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ingredients_fragment_container,
-                        BaseDetailListFragment.getInstance(
-                                this,
-                                R.string.app_ingredient_fragment,
-                                getIntentExtra(RECIPE_ID_KEY, -1)))
-                .commit();
-    }
-
     private void addStepDetailFragmentContainer(int stepId) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.step_detail_fragment_container,
@@ -92,15 +124,6 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
                 .commit();
     }
 
-    private void registerButtons() {
-        registerButton(R.id.ingredients_button, R.string.app_ingredient_fragment);
-        registerButton(R.id.steps_button, R.string.app_step_fragment);
-    }
-
-    private void registerButton(int resId, int fragmentId) {
-        Button button = findViewById(resId);
-        button.setOnClickListener(new ButtonClickListener(fragmentId));
-    }
 
     private boolean getResource(int boolRes) {
         return getResources().getBoolean(boolRes);
@@ -110,10 +133,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         return getIntent().getIntExtra(key, defaultValue);
     }
 
-    private void switchFragment(int fragmentId) {
-        addStepListFragmentContainer(fragmentId);
-        getIntent().putExtra(FRAGMENT_ID_KEY, fragmentId);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,17 +146,4 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         }
     }
 
-    class ButtonClickListener implements View.OnClickListener {
-
-        private int mFragmentId;
-
-        public ButtonClickListener(int fragmentId) {
-            mFragmentId = fragmentId;
-        }
-
-        @Override
-        public void onClick(View v) {
-            switchFragment(mFragmentId);
-        }
-    }
 }

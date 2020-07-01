@@ -22,7 +22,9 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step_detail_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(findViewById(R.id.toolbar));
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // register previous/next nav buttons only if in portrait mode
         if (!isLandscape()) {
             setCurrentStep(getIntentExtra(STEP_ID_KEY, -1));
