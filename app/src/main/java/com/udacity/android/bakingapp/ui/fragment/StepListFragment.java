@@ -1,5 +1,7 @@
 package com.udacity.android.bakingapp.ui.fragment;
 
+import android.widget.ImageView;
+
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.Recipe;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
@@ -34,7 +36,9 @@ public class StepListFragment extends BaseDetailListFragment<Step> implements Ba
     }
 
     @Override
-    public void onClick(RecipeUmbrella recipeType) {
-        mStepClickListener.onClick(recipeType);
+    public void onClick(RecipeUmbrella recipeType, int position, ImageView recipeImage) {
+        mStepClickListener.onClick(recipeType, 0, null);
     }
+
+
 }

@@ -2,8 +2,11 @@ package com.udacity.android.bakingapp.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,11 +50,20 @@ public abstract class BaseMainListFragment extends BaseListFragment implements B
     }
 
     @Override
-    public void onClick(RecipeUmbrella recipeType) {
+    public void onClick(RecipeUmbrella recipeType, int imageDrawable, ImageView sharedImageView) {
+        String imageTransitionName = ViewCompat.getTransitionName(sharedImageView);
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra(RECIPE_ID_KEY, recipeType.getId());
         intent.putExtra(STEP_LIST_SIZE_KEY, ((Recipe) recipeType).steps.size());
-        startActivity(intent);
+        intent.putExtra(DetailActivity.EXTRA_RECIPE_IMAGE_TRANSITION_NAME, imageTransitionName);
+        intent.putExtra(DetailActivity.EXTRA_RECIPE_IMAGE, imageDrawable);
+
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(
+                        getActivity(),
+                        sharedImageView,
+                        imageTransitionName);
+        startActivity(intent, options.toBundle());
         BakingWidgetProvider.sendRefreshBroadcast(
                 getContext(),
                 recipeType.getId(),
@@ -68,4 +80,6 @@ public abstract class BaseMainListFragment extends BaseListFragment implements B
         return R.layout.list_fragment;
     }
 
+
+    abstract BaseMainListFragment getBaseMainListFragment();
 }

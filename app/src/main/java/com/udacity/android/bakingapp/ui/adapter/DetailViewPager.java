@@ -1,14 +1,14 @@
 package com.udacity.android.bakingapp.ui.adapter;
 
-import android.app.Activity;
-import android.content.Context;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.ui.fragment.BaseDetailListFragment;
 
+/**
+ * DetailViewPager used to navigate between Steps and Ingredients of a Recipe.
+ *
+ */
 public class DetailViewPager {
 
     private ViewPagerAdapter mAdapter;

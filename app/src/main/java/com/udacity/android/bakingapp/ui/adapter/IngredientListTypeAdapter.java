@@ -35,9 +35,15 @@ public class IngredientListTypeAdapter extends BaseListTypeAdapter<Ingredient> {
             mBinding = (IngredientListItemBinding) binding;
         }
 
+
+
         @Override
         void bind(Ingredient ingredient) {
             mBinding.setIngredient(ingredient);
         }
+
+        // empty implementation. No click action needed for Ingredients.
+        @Override
+        public void onClick(View v) { }
     }
 }

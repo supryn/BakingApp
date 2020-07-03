@@ -43,7 +43,6 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
     @Override
     public void onBindViewHolder(BaseListTypeAdapter.BaseListTypeViewHolder holder, int position) {
         holder.bind(mDataList.get(position));
-
     }
 
     @Override
@@ -66,6 +65,9 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
 
     abstract BaseListTypeViewHolder createListViewHolder(ViewDataBinding binding);
 
+    List<T> getDataList() {
+        return mDataList;
+    }
 
     abstract class BaseListTypeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -75,10 +77,8 @@ public abstract class BaseListTypeAdapter<T extends RecipeUmbrella> extends Recy
 
         abstract void bind(T data);
 
-        @Override
-        public void onClick(View v) {
-            mClickListener.onClick(mDataList.get(getAdapterPosition()));
+        BakingClickListener getClickListener() {
+            return mClickListener;
         }
     }
-
 }

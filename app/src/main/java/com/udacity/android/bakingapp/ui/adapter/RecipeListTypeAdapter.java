@@ -1,7 +1,9 @@
 package com.udacity.android.bakingapp.ui.adapter;
 
+import android.view.View;
 import android.widget.ImageView;
 
+import androidx.core.view.ViewCompat;
 import androidx.databinding.ViewDataBinding;
 
 import com.squareup.picasso.Picasso;
@@ -51,10 +53,19 @@ class RecipeListTypeAdapter extends BaseListTypeAdapter<Recipe> {
         @Override
         void bind(Recipe recipe) {
             mBinding.setRecipe(recipe);
-            loadImage(recipe);
+            loadImage();
+            ViewCompat.setTransitionName(mRecipeImage, recipe.name);
         }
 
-        private void loadImage(Recipe recipe) {
+        @Override
+        public void onClick(View v) {
+            getClickListener().onClick(
+                    getDataList().get(getAdapterPosition()),
+                    recipeImages.get(getAdapterPosition()),
+                    mRecipeImage);
+        }
+
+        private void loadImage() {
             Picasso.get()
                     .load(recipeImages.get(getAdapterPosition()))
                     .placeholder(R.drawable.default_food_image)

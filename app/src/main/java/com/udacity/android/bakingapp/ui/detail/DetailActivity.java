@@ -1,10 +1,12 @@
 package com.udacity.android.bakingapp.ui.detail;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
@@ -14,6 +16,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
@@ -33,7 +37,10 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
 
     public static final String RECIPE_ID_KEY = "recipe_id";
     public static final String STEP_LIST_SIZE_KEY = "step_list_size_id";
+    public static final String EXTRA_RECIPE_IMAGE_TRANSITION_NAME = "recipe_image_transition_name";
+    public static final String EXTRA_RECIPE_IMAGE = "EXTRA_RECIPE_IMAGE";
     private static final String FRAGMENT_ID_KEY = "fragment_id";
+
 
     private static ViewPager mViewPager;
 
@@ -41,15 +48,13 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-        setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        configureAppBar();
         mViewPager = findViewById(R.id.tab_viewpager);
         if (mViewPager != null) {
             configureViewPager();
             configureTabLayout();
         }
-
 
 //        addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
 //
@@ -67,6 +72,27 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
 //        else {
 //            registerButtons();
 //        }
+    }
+
+    private void configureAppBar() {
+        setSupportActionBar(findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ImageView imageView = findViewById(R.id.app_bar_image);
+        String imageTransitionName = getIntent().getExtras().getString(EXTRA_RECIPE_IMAGE_TRANSITION_NAME);
+        imageView.setTransitionName(imageTransitionName);
+        int imageResId = getIntent().getExtras().getInt(DetailActivity.EXTRA_RECIPE_IMAGE);
+        Picasso.get()
+                .load(imageResId)
+                .noFade()
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        supportStartPostponedEnterTransition();
+                    }
+
+                    @Override
+                    public void onError(Exception e) { supportStartPostponedEnterTransition(); }
+                });
     }
 
     private void configureTabLayout() {
@@ -102,7 +128,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     }
 
     @Override
-    public void onClick(RecipeUmbrella recipeType) {
+    public void onClick(RecipeUmbrella recipeType, int position, ImageView image) {
         if (getResource(R.bool.isTablet)) {
             addStepDetailFragmentContainer(recipeType.getId());
             getIntent().putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
