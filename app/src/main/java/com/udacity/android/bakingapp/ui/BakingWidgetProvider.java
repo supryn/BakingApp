@@ -17,7 +17,8 @@ import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.ui.detail.StepDetailActivity;
 
 /**
- * Implementation of App Widget functionality.
+ * Implementation class for Baking Widget, displaying the individual steps for a Recipe.
+ *
  */
 public class BakingWidgetProvider extends AppWidgetProvider {
 
