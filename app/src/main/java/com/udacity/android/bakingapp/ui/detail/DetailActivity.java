@@ -1,33 +1,21 @@
 package com.udacity.android.bakingapp.ui.detail;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 import com.udacity.android.bakingapp.ui.adapter.BakingClickListener;
 import com.udacity.android.bakingapp.ui.adapter.DetailViewPager;
-import com.udacity.android.bakingapp.ui.adapter.ViewPagerAdapter;
-import com.udacity.android.bakingapp.ui.fragment.BaseDetailListFragment;
 import com.udacity.android.bakingapp.ui.fragment.StepDetailFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Activity displaying more detailed information about a particular Recipe.
@@ -39,6 +27,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
     public static final String STEP_LIST_SIZE_KEY = "step_list_size_id";
     public static final String EXTRA_RECIPE_IMAGE_TRANSITION_NAME = "recipe_image_transition_name";
     public static final String EXTRA_RECIPE_IMAGE = "EXTRA_RECIPE_IMAGE";
+    public static final String EXTRA_RECIPE_NAME = "EXTRA_RECIPE_NAME";
     private static final String FRAGMENT_ID_KEY = "fragment_id";
 
 
@@ -56,26 +45,13 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
             configureTabLayout();
         }
 
-//        addStepListFragmentContainer(getIntentExtra(FRAGMENT_ID_KEY, R.string.app_step_fragment));
-//
-//        // its a Tablet in landscape mode
-//        if (getResource(R.bool.isTablet) && getResource(R.bool.isTabletLandscape)) {
-//            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
-//            registerButtons();
-//        }
-//        // its a Tablet in portrait mode
-//        else if (getResource(R.bool.isTablet)) {
-//            addStepDetailFragmentContainer(getIntentExtra(StepDetailActivity.STEP_ID_KEY, 1));
-//            addIngredientListFragmentContainer();
-//        }
-//        // its a Phone in either portrait or landscape mode
-//        else {
-//            registerButtons();
-//        }
     }
 
     private void configureAppBar() {
-        setSupportActionBar(findViewById(R.id.toolbar));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(getIntent().getExtras().getString(EXTRA_RECIPE_NAME));
+        toolbar.setTitleTextColor(getColor(R.color.colorWhite));
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ImageView imageView = findViewById(R.id.app_bar_image);
         String imageTransitionName = getIntent().getExtras().getString(EXTRA_RECIPE_IMAGE_TRANSITION_NAME);
@@ -84,15 +60,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
         Picasso.get()
                 .load(imageResId)
                 .noFade()
-                .into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        supportStartPostponedEnterTransition();
-                    }
-
-                    @Override
-                    public void onError(Exception e) { supportStartPostponedEnterTransition(); }
-                });
+                .into(imageView);
     }
 
     private void configureTabLayout() {
@@ -137,6 +105,7 @@ public class DetailActivity extends AppCompatActivity implements BakingClickList
             intent.putExtra(StepDetailActivity.STEP_ID_KEY, recipeType.getId());
             intent.putExtra(DetailActivity.RECIPE_ID_KEY, getIntentExtra(RECIPE_ID_KEY, -1));
             intent.putExtra(DetailActivity.STEP_LIST_SIZE_KEY, getIntentExtra(STEP_LIST_SIZE_KEY, -1));
+            intent.putExtra(EXTRA_RECIPE_NAME, getIntent().getExtras().getString(EXTRA_RECIPE_NAME));
             startActivity(intent);
         }
     }

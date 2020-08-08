@@ -43,4 +43,8 @@
     <string name="initial_startup_widget_msg">No widget data available.</string>
 
 
+    <!-- Dummy values -->
+    <string name="step_activity_detail_current_step">5</string>
+
+
 </resources>

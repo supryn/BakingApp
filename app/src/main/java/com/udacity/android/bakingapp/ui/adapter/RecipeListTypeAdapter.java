@@ -8,7 +8,6 @@ import androidx.databinding.ViewDataBinding;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.android.bakingapp.R;
-
 import com.udacity.android.bakingapp.databinding.RecipeListItemBinding;
 import com.udacity.android.bakingapp.model.Recipe;
 

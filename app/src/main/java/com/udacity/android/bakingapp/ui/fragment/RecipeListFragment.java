@@ -34,8 +34,4 @@ public class RecipeListFragment extends BaseMainListFragment {
         return R.string.app_adapter_recipes;
     }
 
-    @Override
-    BaseMainListFragment getBaseMainListFragment() {
-        return this;
-    }
 }

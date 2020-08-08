@@ -1,15 +1,13 @@
 package com.udacity.android.bakingapp.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,12 +24,14 @@ import com.udacity.android.bakingapp.ui.adapter.ListTypeAdapterFactory;
  */
 public abstract class BaseListFragment extends Fragment {
 
-    private int mRecipeId;
+    private static final String LOG_TAG = BaseListFragment.class.getSimpleName();
 
+    private int mRecipeId;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "entered onCreateView");
         View view = inflater.inflate(getLayoutId(), viewGroup, false);
         BaseListTypeAdapter adapter = ListTypeAdapterFactory.create(getAdapterResId(), getClickListener());
         setupRecyclerView(view, adapter);
@@ -47,7 +47,7 @@ public abstract class BaseListFragment extends Fragment {
     }
 
     void hideProgressBar(View view) {
-        view.findViewById(R.id.baking_progress_bar).setVisibility(View.GONE);
+        view.findViewById(R.id.baking_progress_bar).setVisibility(View.INVISIBLE);
     }
 
     private int getRecipeId(Bundle bundle) {

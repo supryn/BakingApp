@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.model.RecipeUmbrella;
 
 import java.util.List;

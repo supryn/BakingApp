@@ -40,8 +40,6 @@ public class StepListTypeAdapter extends BaseListTypeAdapter<Step> {
             mBinding = (StepListItemBinding) binding;
         }
 
-
-
         @Override
         void bind(Step step) {
             mBinding.setStep(step);

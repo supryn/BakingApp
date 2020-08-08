@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import com.udacity.android.bakingapp.R;
 import com.udacity.android.bakingapp.ui.fragment.StepDetailFragment;
@@ -24,10 +23,11 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
         setContentView(R.layout.step_detail_activity);
 //        setSupportActionBar(findViewById(R.id.toolbar));
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle(getIntent().getExtras().getString(DetailActivity.EXTRA_RECIPE_NAME));
 
         // register previous/next nav buttons only if in portrait mode
         if (!isLandscape()) {
-            setCurrentStep(getIntentExtra(STEP_ID_KEY, -1));
+            setCurrentStep(getIntentExtra(STEP_ID_KEY));
             registerNavigationButton(R.id.previous_step_button);
             registerNavigationButton(R.id.next_step_button);
         }
@@ -36,8 +36,8 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
                 .beginTransaction()
                 .replace(R.id.fragment_container,
                         StepDetailFragment.getInstance(
-                                getIntentExtra(DetailActivity.RECIPE_ID_KEY, -1),
-                                getIntentExtra(STEP_ID_KEY, -1)))
+                                getIntentExtra(DetailActivity.RECIPE_ID_KEY),
+                                getIntentExtra(STEP_ID_KEY)))
                 .commit();
     }
 
@@ -70,7 +70,7 @@ public class StepDetailActivity extends AppCompatActivity implements BaseStepNav
         ((TextView) findViewById(R.id.current_step)).setText(Integer.toString(currentStep));
     }
 
-    private int getIntentExtra(String key, int defaultValue) {
-        return getIntent().getIntExtra(key, defaultValue);
+    private int getIntentExtra(String key) {
+        return getIntent().getIntExtra(key, -1);
     }
 }

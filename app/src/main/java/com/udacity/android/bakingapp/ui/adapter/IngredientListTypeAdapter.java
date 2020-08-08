@@ -2,7 +2,6 @@ package com.udacity.android.bakingapp.ui.adapter;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 
 import com.udacity.android.bakingapp.R;

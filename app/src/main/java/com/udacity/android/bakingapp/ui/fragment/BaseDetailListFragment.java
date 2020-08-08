@@ -1,6 +1,7 @@
 package com.udacity.android.bakingapp.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -26,8 +27,11 @@ import java.util.List;
  */
 public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends BaseListFragment {
 
+    static final String LOG = BaseDetailListFragment.class.getSimpleName();
 
     static final String RECIPE_ID_KEY = "recipe_id_key";
+    private DetailActivityViewModel mViewModel;
+    private BaseListTypeAdapter mAdapter;
 
     public static BaseDetailListFragment getInstance(BakingClickListener clickListener, int resId, int recipeId) {
         BaseDetailListFragment fragment;
@@ -52,17 +56,22 @@ public abstract class BaseDetailListFragment<T extends RecipeUmbrella> extends B
     void observeData(View view, BaseListTypeAdapter adapter, int recipeId) {
         DetailActivityViewModelFactory factory = ObjectProviderUtil
                 .provideDetailActivityViewModelFactory(view.getContext(), recipeId);
-        DetailActivityViewModel viewModel = new ViewModelProvider(this, factory)
+        mViewModel = new ViewModelProvider(this, factory)
                 .get(DetailActivityViewModel.class);
-        viewModel.getRecipe().observe(this, recipe -> {
-            if (recipe != null) {
-                hideProgressBar(view);
-                adapter.swapData(getItemList(recipe));
-            }
-
-        });
+        mAdapter = adapter;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mViewModel.getRecipe().observe(this, recipe -> {
+            if (recipe != null) {
+                hideProgressBar(getView());
+                mAdapter.swapData(getItemList(recipe));
+            }
+        });
+        Log.d(LOG, "entered onResume");
+    }
 
     RecyclerView.LayoutManager getLayoutManager(View view) {
         return new LinearLayoutManager(view.getContext());
